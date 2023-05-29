@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Final.DAL;
 using Proyecto_Final.DAL.Entities;
+using Proyecto_Final.Models;
 
 namespace Proyecto_Final.Controllers
 {
@@ -21,12 +22,14 @@ namespace Proyecto_Final.Controllers
             _context = context;
         }
 
+
         // GET: Countries
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-              return _context.Countries != null ? 
-                          View(await _context.Countries.ToListAsync()) :
-                          Problem("Entity set 'DataBaseContext.Countries'  is null.");
+            return View(await _context.Countries
+                .Include(c => c.States) //El Include me hace las veces del INNER JOIN
+                .ToListAsync());
         }
 
         // GET: Countries/Details/5
@@ -168,5 +171,27 @@ namespace Proyecto_Final.Controllers
             await _context.SaveChangesAsync(); //Delete From Counties where Id = '7a216d04-3048-4757-9b02-f72ded5180bf'
             return RedirectToAction(nameof(Index));
         }
+
+
+
+        //////////////////////////////////
+
+        [HttpGet]
+        public async Task<IActionResult> AddState(Guid? countryId)
+        {
+            if (countryId == null) return NotFound();
+
+            Country country = await _context.Countries.FirstOrDefaultAsync(c => c.Id == countryId);
+
+            if (country == null) return NotFound();
+
+            StateViewModel stateViewModel = new()
+            {
+                CountryId = country.Id,
+            };
+
+            return View(stateViewModel);
+        }
+
     }
 }
