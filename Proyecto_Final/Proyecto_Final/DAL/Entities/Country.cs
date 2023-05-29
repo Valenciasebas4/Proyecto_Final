@@ -11,10 +11,10 @@ namespace Proyecto_Final.DAL.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")] 
         public string Name { get; set; }
 
-        /*[Display(Name = "Estados")] 
-        public ICollection<State> States { get; set; }
+        [Display(Name = "Estados")] 
+        public ICollection<State> States { get; set; } // Colección de Estados para el país
 
         [Display(Name = "Número Estados")] 
-        public int StateNumber => States == null ? 0 : States.Count; */ 
+        public int StateNumber => States == null ? 0 : States.Count; 
     }
 }

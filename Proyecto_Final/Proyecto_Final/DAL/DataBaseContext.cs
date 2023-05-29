@@ -13,6 +13,7 @@ namespace Proyecto_Final.DAL
         /*Mapeando la entidad para la Tabla*/
         public DbSet<Country> Countries { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<State> States { get; set; }
 
         /*Indicies para las tablas*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -21,6 +22,7 @@ namespace Proyecto_Final.DAL
             /* Se usa para validar que el nombre sea Unico*/
             modelBuilder.Entity<Country>().HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
+            modelBuilder.Entity<State>().HasIndex("Name", "CountryId").IsUnique(); // Para estos casos, debo crear un índice Compuesto
         }
     }
 }

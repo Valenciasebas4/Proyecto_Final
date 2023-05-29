@@ -5,7 +5,7 @@
 }
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
 
-<h1>Países</h1>
+<h1 class="text-center">Países</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-outline-primary">Crear nuevo país</a>
@@ -25,6 +25,9 @@
                                 @Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.StateNumber)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.CreatedDate)
                             </th>
                             <th>
@@ -39,6 +42,9 @@
                             <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                 <td>
+                                    @Html.DisplayFor(modelItem => item.StateNumber)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.CreatedDate)
