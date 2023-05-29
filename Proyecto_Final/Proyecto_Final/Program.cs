@@ -1,7 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using Proyecto_Final.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+/*se define una conexion default para la base de datos*/
+builder.Services.AddDbContext<DataBaseContext>(
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+
 
 var app = builder.Build();
 
