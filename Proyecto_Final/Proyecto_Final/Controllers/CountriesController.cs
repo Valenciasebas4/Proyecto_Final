@@ -42,6 +42,7 @@ namespace Proyecto_Final.Controllers
 
             var country = await _context.Countries
                 .Include(c => c.States)
+                .ThenInclude(s => s.Cities)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (country == null)
             {
