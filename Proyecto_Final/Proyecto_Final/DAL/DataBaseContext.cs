@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Proyecto_Final.DAL.Entities;
 
 namespace Proyecto_Final.DAL
 {
-    public class DataBaseContext :DbContext
+    public class DataBaseContext : IdentityDbContext<User>
     {
         /*Constructor*/
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options) 
