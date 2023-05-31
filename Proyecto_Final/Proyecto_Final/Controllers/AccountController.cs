@@ -55,6 +55,10 @@ namespace Proyecto_Final.Controllers
         }
 
 
+        public IActionResult Unauthorized()
+        {
+            return View();
+        }
 
 
 

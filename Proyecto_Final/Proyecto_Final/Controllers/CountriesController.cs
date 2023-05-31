@@ -13,6 +13,7 @@ using Proyecto_Final.Models;
 
 namespace Proyecto_Final.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CountriesController : Controller
     {
         private readonly DataBaseContext _context;
@@ -64,7 +65,7 @@ namespace Proyecto_Final.Controllers
         // POST: Countries/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(Country country)
         {
             if (ModelState.IsValid)
@@ -94,7 +95,7 @@ namespace Proyecto_Final.Controllers
 
 
         // GET: Countries/Edit/5
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Countries == null) return NotFound();
@@ -112,7 +113,7 @@ namespace Proyecto_Final.Controllers
         // POST: Countries/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Guid id, Country country)
         {
             if (id != country.Id) return NotFound();
@@ -145,7 +146,7 @@ namespace Proyecto_Final.Controllers
 
 
         // GET: Countries/Delete/5
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Countries == null) return NotFound();
@@ -161,7 +162,7 @@ namespace Proyecto_Final.Controllers
         // POST: Countries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.Countries == null)
