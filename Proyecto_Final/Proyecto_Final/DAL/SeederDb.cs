@@ -8,7 +8,7 @@ namespace Proyecto_Final.DAL
     {
         private readonly DataBaseContext _context;
         private readonly IUserHelper _userHelper;
-        //private readonly IAzureBlobHelper _azureBlobHelper;
+        private readonly IAzureBlobHelper _azureBlobHelper;
 
         public SeederDb(DataBaseContext context, IUserHelper userHelper/*, IAzureBlobHelper azureBlobHelper*/)
         {
