@@ -25,8 +25,8 @@ namespace Proyecto_Final.DAL
             await PopulateCountriesStatesCitiesAsync();
             await PopulateRolesAsync();
             //await PopulateProductAsync();
-            await PopulateUserAsync("Sebastian", "Londoño", "sebas@yopmail.com", "3142393101", "Barbosa", "1035234145", "SteveJobs.png", UserType.Admin);
-            await PopulateUserAsync("Jessica", "Gomez", "jess@yopmail.com", "3188955943", "Barbosa", "1035232261", "BillGates.png", UserType.User);
+            await PopulateUserAsync("Sebastian", "Londoño", "sebas@yopmail.com", "3142393101", "Barbosa", "1035234145", "Sebas.png", UserType.Admin);
+            await PopulateUserAsync("Jessica", "Gomez", "jess@yopmail.com", "3188955943", "Barbosa", "1035232261", "Sebas.png", UserType.User);
             
 
             await _context.SaveChangesAsync();
