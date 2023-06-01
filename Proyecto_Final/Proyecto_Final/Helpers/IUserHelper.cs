@@ -24,8 +24,8 @@ namespace Proyecto_Final.Helpers
 
         Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword);
 
-        //Task<IdentityResult> UpdateUserAsync(User user);
+        Task<IdentityResult> UpdateUserAsync(User user);
 
-        //Task<User> GetUserAsync(Guid userId); //Sobrecargado
+        Task<User> GetUserAsync(Guid userId); //Sobrecargado
     }
 }

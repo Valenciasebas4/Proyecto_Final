@@ -2,7 +2,7 @@
 
 namespace Proyecto_Final.Models
 {
-    public class ChangePasswordViewModel
+    public class ChangePasswordViewModel 
     {
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña actual")]

@@ -157,7 +157,7 @@ namespace Proyecto_Final.Controllers
             return View(editUserViewModel);
         }
 
-        /*
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditUser(EditUserViewModel editUserViewModel)
@@ -187,7 +187,7 @@ namespace Proyecto_Final.Controllers
 
             return View(editUserViewModel);
         }
-        */
+        
         // DropDownListLocation es la lista desplegable de los paises, estados y ciudades
         private async Task FillDropDownListLocation(EditUserViewModel addUserViewModel)
         {
@@ -200,7 +200,7 @@ namespace Proyecto_Final.Controllers
         {
             return View();
         }
-        /*
+        
         
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel)
@@ -226,7 +226,7 @@ namespace Proyecto_Final.Controllers
 
             return View(changePasswordViewModel);
         }
-        */
+        
 
         [HttpGet]
         public JsonResult GetStates(Guid countryId)
