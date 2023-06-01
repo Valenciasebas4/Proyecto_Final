@@ -43,8 +43,23 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.div-title {
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px);
+    border: 1px solid rgba(31, 132, 224, 0.3);
+    background-image: url(../images/fondo.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+    .div-title h2 {
+        color: white;
+    }
 .h3-login {
-color:white;
+    color: white;
 }
 .-login {
     color: white;

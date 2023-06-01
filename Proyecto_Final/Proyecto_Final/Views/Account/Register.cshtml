@@ -3,10 +3,11 @@
 @{
     ViewData["Title"] = "Register";
 }
+<div class="text-center rounded-pill div-title">
+    <h2 >Registrar Usuario</h2>
+</div>
 
-<h2>Registrar</h2>
 
-<h4>Usuario</h4>
 <hr />
 <div class="row">
     <div class="col-md-12">
@@ -18,11 +19,17 @@
             <input type="hidden" asp-for="States" />
             <input type="hidden" asp-for="Cities" />
 
-            <div class="form-group">
+            <div class="form-floating">
+                <input asp-for="Username" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label asp-for="Username" for="floatingInput">Email</label>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+           <!-- <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
                 <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
+            </div>-->
 
             <div class="row">
                 <div class="col-md-6">
