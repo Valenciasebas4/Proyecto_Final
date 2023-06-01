@@ -22,7 +22,7 @@ namespace Proyecto_Final.Helpers
 
         Task LogoutAsync();
 
-        //Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword);
+        Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword);
 
         //Task<IdentityResult> UpdateUserAsync(User user);
 

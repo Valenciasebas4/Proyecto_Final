@@ -72,15 +72,15 @@ namespace Proyecto_Final.Services
 
         public async Task<User> GetUserAsync(string email)
         {
-            return await _context.Users
+           /* return await _context.Users
                 .Include(u => u.City)
-                .FirstOrDefaultAsync(u => u.Email == email);
+                .FirstOrDefaultAsync(u => u.Email == email);*/
 
-            /*return await _context.Users
+            return await _context.Users
                 .Include(u => u.City)
                 .ThenInclude(c => c.State)
                 .ThenInclude(s => s.Country)
-                .FirstOrDefaultAsync(u => u.Email == email);*/
+                .FirstOrDefaultAsync(u => u.Email == email);
         }
 
         public async Task<bool> IsUserInRoleAsync(User user, string roleName)
@@ -111,14 +111,14 @@ namespace Proyecto_Final.Services
         public async Task<User> GetUserAsync(Guid userId)
         {
 
-            return await _context.Users
+           /* return await _context.Users
                 .Include(u => u.City)
-                .FirstOrDefaultAsync(u => u.Id == userId.ToString());
-            /*return await _context.Users
+                .FirstOrDefaultAsync(u => u.Id == userId.ToString());*/
+            return await _context.Users
                 .Include(u => u.City)
                 .ThenInclude(c => c.State)
                 .ThenInclude(s => s.Country)
-                .FirstOrDefaultAsync(u => u.Id == userId.ToString());*/
+                .FirstOrDefaultAsync(u => u.Id == userId.ToString());
         }
     }
 }
