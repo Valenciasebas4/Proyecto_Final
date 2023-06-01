@@ -4,11 +4,14 @@ using Proyecto_Final.DAL;
 using Proyecto_Final.DAL.Entities;
 using Proyecto_Final.Helpers;
 using Proyecto_Final.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services
+    .AddControllersWithViews()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 /*se define una conexion default para la base de datos*/
 builder.Services.AddDbContext<DataBaseContext>(
@@ -25,6 +28,9 @@ builder.Services.AddScoped<IUserHelper, UserHelper>();
 
 //Builder para llamar la interfaz IDropDownListHelper.cs
 builder.Services.AddScoped<IDropDownListHelper, DropDownListHelper>();
+
+//Builder para llamar la interfaz IDropDownListHelper.cs
+builder.Services.AddScoped<IAzureBlobHelper, AzureBlobHelper>();
 
 builder.Services.AddIdentity<User, IdentityRole>(io =>
 {

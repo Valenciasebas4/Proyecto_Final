@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto_Final.Models
 {
-    public class AddUserViewModel
+    public class AddUserViewModel : EditUserViewModel
     {
         [Display(Name = "Email")]
         [EmailAddress(ErrorMessage = "Debes ingresar un correo válido.")]

@@ -40,7 +40,7 @@ namespace Proyecto_Final.Services
             return await _userManager.CreateAsync(user, password);
         }
 
-       /* public async Task<User> AddUserAsync(AddUserViewModel addUserViewModel)
+        public async Task<User> AddUserAsync(AddUserViewModel addUserViewModel)
         {
             User user = new()
             {
@@ -62,7 +62,7 @@ namespace Proyecto_Final.Services
             User newUser = await GetUserAsync(addUserViewModel.Username);
             await AddUserToRoleAsync(newUser, user.UserType.ToString());
             return newUser;
-        }*/
+        }
 
 
         public async Task AddUserToRoleAsync(User user, string roleName)

@@ -10,7 +10,7 @@ namespace Proyecto_Final.Helpers
 
         Task<IdentityResult> AddUserAsync(User user, string password);
 
-        //Task<User> AddUserAsync(AddUserViewModel addUserViewModel);
+        Task<User> AddUserAsync(AddUserViewModel addUserViewModel);
 
         Task AddRoleAsync(string roleName); 
 
