@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Final.DAL;
 using Proyecto_Final.DAL.Entities;
 using Proyecto_Final.Helpers;
 using Proyecto_Final.Services;
+using System.Globalization;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +33,18 @@ builder.Services.AddScoped<IDropDownListHelper, DropDownListHelper>();
 
 //Builder para llamar la interfaz IDropDownListHelper.cs
 builder.Services.AddScoped<IAzureBlobHelper, AzureBlobHelper>();
+
+var supportedCultures = new[]
+{
+    new CultureInfo("es-CO")
+};
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("es-CO");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
 
 builder.Services.AddIdentity<User, IdentityRole>(io =>
 {
