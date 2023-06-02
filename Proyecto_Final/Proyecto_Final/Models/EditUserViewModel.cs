@@ -62,5 +62,6 @@ namespace Proyecto_Final.Models
         public Guid CityId { get; set; }
 
         public IEnumerable<SelectListItem> Cities { get; set; }
+  
     }
 }

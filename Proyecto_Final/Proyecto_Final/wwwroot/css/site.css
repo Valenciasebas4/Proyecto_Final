@@ -69,9 +69,32 @@ body {
 color:white;
 }
 
+/*Css Admin*/
+.body-admin {
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px);
+    border: 1px solid rgba(31, 132, 224, 0.3);
+    background-image: url(../images/fondo.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.title-admin {
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px);
+    border: 1px solid rgba(31, 132, 224, 0.3);
+    color: white;
+}
+
+
+
+
 @charset "utf-8";
 /* Css Productos*/
-
 .card {
     display: flex;
     flex-direction: column;
@@ -141,3 +164,60 @@ color:white;
     display: flex;
     text-align: center;
 }
+
+/*CSS confirmar compra*/
+
+.body-compra {
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px);
+    border: 1px solid rgba(31, 132, 224, 0.3);
+
+    margin: 10px auto;
+}
+
+
+
+.confirmation {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+    .confirmation h2 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .confirmation p {
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .confirmation ul {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+
+    .confirmation li {
+        margin-bottom: 5px;
+    }
+
+    .confirmation a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .confirmation a:hover {
+            background-color: #666;
+    }

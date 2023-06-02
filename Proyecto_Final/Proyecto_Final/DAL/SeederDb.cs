@@ -179,10 +179,15 @@ namespace Proyecto_Final.DAL
         {
             if (!_context.Products.Any())
             {
-                await AddProductAsync("Balon", 30000M, 5F, new List<string>() { "Accesorios de gimnasio" }, new List<string>() { "balonazul.png" });
-                await AddProductAsync("Aro Azul", 25000M, 10F, new List<string>() { "Accesorios de gimnasio" }, new List<string>() { "aroazul.png" });
-                      
-              
+                await AddProductAsync("Balon Azul", 30000M, 5F, new List<string>() { "Accesorios de gimnasio" }, new List<string>() { "balonazul.png" });
+                await AddProductAsync("Balon Gris", 30000M, 5F, new List<string>() { "Accesorios de gimnasio" }, new List<string>() { "balon_gris.png" });
+                await AddProductAsync("Balon Rosa", 30000M, 5F, new List<string>() { "Accesorios de gimnasio" }, new List<string>() { "balon_rosa.png" });
+                await AddProductAsync("Aro", 25000M, 10F, new List<string>() { "Accesorios de gimnasio" }, new List<string>() { "aroazul.png" });
+                await AddProductAsync("Barra Metalica Negra", 180000M, 10F, new List<string>() { "Accesorios de gimnasio" }, new List<string>() { "barra_negra.png" });
+                await AddProductAsync("Visera Roja", 15000M, 15F, new List<string>() { "Ropa deportiva" }, new List<string>() { "visera_roja.png" });
+                await AddProductAsync("Caminadora", 260000M, 5F, new List<string>() { "Máquinas de ejercicio" }, new List<string>() { "caminadora.png" });
+                await AddProductAsync("Colchoneta Morada", 25000M, 50F, new List<string>() { "Accesorios de gimnasio" }, new List<string>() { "colchoneta_morada.png" });
+
 
             }
         }

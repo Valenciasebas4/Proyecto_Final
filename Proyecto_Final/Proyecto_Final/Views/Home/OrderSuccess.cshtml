@@ -3,14 +3,24 @@
     ViewData["Title"] = "OrderSuccess";
 }
 
-<div class="container">
+<div class="container body-compra">
     <main role="main" class="pb-3 p-3">
         <div class="row">
             <div class="col-md-4 offset-4">
-                <img src="~/images/Shopping.png" style="width:400px;" />
-                <h2>¡Gracias!</h2>
-                <h4>Su pedido fue registrado en nuestro sistema, pronto uno de nuestros asesores se comunicará con usted.</h4>
-                <a asp-action="Index" class="mt-2 btn btn-outline-success">Inicio</a>
+                <img src="~/images/Shopping.png" style="width:350px;" />
+                    <div class="confirmation">
+                          <h2>¡Gracias por tu compra!</h2>
+                          <p>Tu pedido ha sido procesado y confirmado.</p>
+                      <p>Detalles del pedido:</p>
+                          <ul>
+                            <li>Producto: Nombre del Producto</li>
+                            <li>Precio: $99.99</li>
+                            <li>Cantidad: 1</li>
+                            <li>Total: $99.99</li>
+                          </ul>
+                          <p>Te enviaremos una confirmación por correo electrónico con más detalles.</p>
+                            <a asp-action="Index" class="mt-2 btn btn-outline-success">Inicio</a>
+                     </div>
             </div>
         </div>
     </main>
