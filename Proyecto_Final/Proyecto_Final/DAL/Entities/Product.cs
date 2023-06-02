@@ -6,7 +6,7 @@ namespace Proyecto_Final.DAL.Entities
 {
     public class Product : Entity
     {
-        //public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
 
         [Display(Name = "Nombre")]
         [MaxLength(50, ErrorMessage = "El campo {0} debe tener máximo {1} caracteres.")]

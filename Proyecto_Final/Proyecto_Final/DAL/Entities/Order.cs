@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Proyecto_Final.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto_Final.DAL.Entities
 {
@@ -10,8 +11,8 @@ namespace Proyecto_Final.DAL.Entities
         [Display(Name = "Comentarios")]
         public string? Remarks { get; set; }
 
-        //[Display(Name = "Estado Orden")]
-        //public OrderStatus OrderStatus { get; set; }
+        [Display(Name = "Estado Orden")]
+        public OrderStatus OrderStatus { get; set; }
 
         public ICollection<OrderDetail> OrderDetails { get; set; }
 

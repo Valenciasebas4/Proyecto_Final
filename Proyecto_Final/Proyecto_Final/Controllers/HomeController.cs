@@ -1,7 +1,8 @@
-﻿using Azure;
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Proyecto_Final.Common;
 using Proyecto_Final.DAL;
 using Proyecto_Final.DAL.Entities;
 using Proyecto_Final.Helpers;
@@ -15,14 +16,14 @@ namespace Proyecto_Final.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly DataBaseContext _context;
         private readonly IUserHelper _userHelper;
-       // private readonly IOrderHelper _orderHelper;
+        private readonly IOrderHelper _orderHelper;
 
-        public HomeController(ILogger<HomeController> logger, DataBaseContext context, IUserHelper userHelper/*, IOrderHelper orderHelper*/)
+        public HomeController(ILogger<HomeController> logger, DataBaseContext context, IUserHelper userHelper, IOrderHelper orderHelper)
         {
             _logger = logger;
             _context = context;
             _userHelper = userHelper;
-            //_orderHelper = orderHelper;
+            _orderHelper = orderHelper;
         }
 
         public async Task<IActionResult> Index()
