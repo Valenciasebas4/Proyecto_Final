@@ -310,7 +310,7 @@ namespace Proyecto_Final.Controllers
         {
             return View();
         }
-/*
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ShowCartAndConfirm(ShowCartViewModel showCartViewModel)
@@ -330,6 +330,6 @@ namespace Proyecto_Final.Controllers
 
             ModelState.AddModelError(string.Empty, response.Message);
             return View(showCartViewModel);
-        }*/
+        }
     }
 }
