@@ -6,67 +6,72 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
 
-<h1>Detalles</h1>
-
-<div>
-    <h4>Dpto/Estado</h4>
-    <partial name="../Shared/PartialViews/_StateDetailDelete" />
-</div>
-<div>
-    <br />
-    <a asp-action="AddCity" asp-route-stateId="@Model?.Id" class="btn btn-outline-primary">Agregar Ciudad</a>
-    <a asp-action="EditState" asp-route-stateid="@Model?.Id" class="btn btn-outline-warning">Editar Dto/Estado</a>
-    <a asp-action="Details" asp-route-id="@Model?.Country.Id" class="btn btn-outline-success">Regresar</a>
-</div>
-<hr />
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Ciudades</h3>
-            </div>
-            <div class="panel-body">
-                <table class="table table-hover table-responsive table-striped" id="CityTable">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Cities.FirstOrDefault().Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Cities.FirstOrDefault().CreatedDate)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Cities.FirstOrDefault().ModifiedDate)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Cities)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ModifiedDate)
-                                </td>
-                                <td>
-                                    <a asp-action="EditCity" asp-route-cityId="@item.Id" class="btn btn-outline-warning">Editar</a>
-                                    <a asp-action="DetailsCity" asp-route-cityId="@item.Id" class="btn btn-outline-info">Detalles</a>
-                                    <a asp-action="DeleteCity" asp-route-cityId="@item.Id" class="btn btn-outline-danger">Eliminar</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+<div class="container">
+    <main role="main" class="pb-3 p-3">
+        <h1>Detalles Dpto/Estado</h1>
+        <hr />
+        <div>
+            <partial name="../Shared/PartialViews/_StateDetailDelete" />
+        </div>
+        <div>
+            <br />
+            <a asp-action="AddCity" asp-route-stateId="@Model?.Id" class="btn btn-outline-primary">Agregar Ciudad</a>
+            <a asp-action="EditState" asp-route-stateid="@Model?.Id" class="btn btn-outline-warning">Editar Dto/Estado</a>
+            <a asp-action="Details" asp-route-id="@Model?.Country.Id" class="btn btn-outline-success">Regresar</a>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ciudades</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover table-responsive table-striped" id="CityTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Cities.FirstOrDefault().Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Cities.FirstOrDefault().CreatedDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Cities.FirstOrDefault().ModifiedDate)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Cities)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ModifiedDate)
+                                        </td>
+                                        <td>
+                                            <a asp-action="EditCity" asp-route-cityId="@item.Id" class="btn btn-outline-warning">Editar</a>
+                                            <a asp-action="DetailsCity" asp-route-cityId="@item.Id" class="btn btn-outline-info">Detalles</a>
+                                            <a asp-action="DeleteCity" asp-route-cityId="@item.Id" class="btn btn-outline-danger">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+
+    </main>
 </div>
+
 
 @section Scripts {
     @{

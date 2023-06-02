@@ -6,18 +6,23 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
 
-<h1>Detalles</h1>
+<div class="container">
+    <main role="main" class="pb-3 p-3">
+        <h1>Detalles ciudad</h1>
+        <hr />
+        <div>
+            <partial name="../Shared/PartialViews/_CityDetailDelete" />
+        </div>
+        <div>
+            <br />
+            <a asp-action="EditCity" asp-route-cityId="@Model?.Id" class="btn btn-outline-primary">Editar Ciudad</a>
+            <a asp-action="DeleteCity" asp-route-cityId="@Model?.Id" class="btn btn-outline-warning">Eliminar Ciudad</a>
+            <a asp-action="DetailsState" asp-route-stateId="@Model?.State.Id" class="btn btn-outline-success">Regresar</a>
+        </div>
+    </main>
+</div>
 
-<div>
-    <h4>Ciudad</h4>
-    <partial name="../Shared/PartialViews/_CityDetailDelete" />
-</div>
-<div>
-    <br />
-    <a asp-action="EditCity" asp-route-cityId="@Model?.Id" class="btn btn-outline-primary">Editar Ciudad</a>
-    <a asp-action="DeleteCity" asp-route-cityId="@Model?.Id" class="btn btn-outline-warning">Eliminar Ciudad</a>
-    <a asp-action="DetailsState" asp-route-stateId="@Model?.State.Id" class="btn btn-outline-success">Regresar</a>
-</div>
+
 
 @section Scripts {
     @{
