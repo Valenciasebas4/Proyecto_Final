@@ -24,7 +24,7 @@ namespace Proyecto_Final.DAL
             await PopulateCategoriesAsync();
             await PopulateCountriesStatesCitiesAsync();
             await PopulateRolesAsync();
-            //await PopulateProductAsync();
+            await PopulateProductAsync();
             await PopulateUserAsync("Sebastian", "Londoño", "sebas@yopmail.com", "3142393101", "Barbosa", "1035234145", "Sebas.png", UserType.Admin);
             await PopulateUserAsync("Jessica", "Gomez", "jess@yopmail.com", "3188955943", "Barbosa", "1035232261", "Sebas.png", UserType.User);
             
@@ -174,18 +174,16 @@ namespace Proyecto_Final.DAL
 
 
         // Productos
-        /*
+        
         private async Task PopulateProductAsync()
         {
             if (!_context.Products.Any())
             {
-                await AddProductAsync("Medias Grises", 270000M, 12F, new List<string>() { "Ropa Interior", "Calzado" }, new List<string>() { "Medias1.png" });
-                await AddProductAsync("Medias Negras", 300000M, 12F, new List<string>() { "Ropa Interior", "Calzado" }, new List<string>() { "Medias2.png" });
-                await AddProductAsync("TV Samsung OLED", 5000000M, 12F, new List<string>() { "Tecnología", "Gamers" }, new List<string>() { "TvOled.png", "TvOled2.png" });
-                await AddProductAsync("Play Station 5", 5000000M, 12F, new List<string>() { "Gamers" }, new List<string>() { "PS5.png", "PS52.png" });
-                await AddProductAsync("Bull Dog Francés", 10000000M, 12F, new List<string>() { "Mascotas" }, new List<string>() { "Frenchie1.png", "Frenchie2.png", "Frenchie3.png" });
-                await AddProductAsync("Cepillo de dientes", 5000M, 12F, new List<string>() { "Implementos de Aseo" }, new List<string>() { "CepilloDientes.png" });
-                await AddProductAsync("Crema dental Pro Alivio", 25000M, 12F, new List<string>() { "Implementos de Aseo" }, new List<string>() { "CremaDental1.png", "CremaDental2.png" });
+                await AddProductAsync("Balon", 30000M, 5F, new List<string>() { "Accesorios de gimnasio" }, new List<string>() { "balonazul.png" });
+                await AddProductAsync("Aro Azul", 25000M, 10F, new List<string>() { "Accesorios de gimnasio" }, new List<string>() { "aroazul.png" });
+                      
+              
+
             }
         }
 
@@ -193,7 +191,7 @@ namespace Proyecto_Final.DAL
         {
             Product product = new()
             {
-                Description = name,
+                Description = null,
                 Name = name,
                 Price = price,
                 Stock = stock,
@@ -217,7 +215,7 @@ namespace Proyecto_Final.DAL
         }
 
 
-        */
+        
 
 
 
