@@ -9,59 +9,9 @@
     <link rel="stylesheet" href="~/Proyecto_Final.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Energym</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Politicas de Privacidad</a>
-                        </li>
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Countries" asp-action="Index">Países</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categorías</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Productos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Usuarios</a>
-                            </li>
-                        }
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        @if (User.Identity.IsAuthenticated)
-                        {  
-                            <li class="nav-item">                              
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="EditUser">@User.Identity.Name</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Cerrar Sesión</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Iniciar Sesión</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+
+    @Html.Partial("_Header")
+    
     <div class="container">
         <main role="main" class="pb-3 p-3">
             @RenderBody()
@@ -71,10 +21,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @Html.Partial("_Footer")
 </body>
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2023 - Energym - <a asp-area="" asp-controller="Home" asp-action="Privacy">Politicas de Privacidad</a>
-    </div>
-</footer>
+
 </html>
