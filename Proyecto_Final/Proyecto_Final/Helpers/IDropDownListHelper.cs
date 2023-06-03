@@ -14,5 +14,6 @@ namespace Proyecto_Final.Helpers
         Task<IEnumerable<SelectListItem>> GetDDLStatesAsync(Guid countryId);
 
         Task<IEnumerable<SelectListItem>> GetDDLCitiesAsync(Guid stateId);
+        Task<IEnumerable<SelectListItem>> GetDDLTrainingsAsync();
     }
 }

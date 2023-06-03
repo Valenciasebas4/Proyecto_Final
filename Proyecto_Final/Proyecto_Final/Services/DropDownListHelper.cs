@@ -15,6 +15,30 @@ namespace Proyecto_Final.Services
             _context = context;
         }
 
+
+
+        public async Task<IEnumerable<SelectListItem>> GetDDLTrainingsAsync()
+        {
+            List<SelectListItem> listTrainings = await _context.Trainings
+                .Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString(),
+                })
+                .OrderBy(c => c.Text)
+                .ToListAsync();
+
+            listTrainings.Insert(0, new SelectListItem
+            {
+                Text = "Seleccione un entrenamiento...",
+                Value = Guid.Empty.ToString(),
+                Selected = true
+            });
+
+            return listTrainings;
+        }
+
+
         public async Task<IEnumerable<SelectListItem>> GetDDLCategoriesAsync()
         {
             List<SelectListItem> listCategories = await _context.Categories
@@ -130,5 +154,7 @@ namespace Proyecto_Final.Services
 
             return listCities;
         }
+
+
     }
 }
