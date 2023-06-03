@@ -31,6 +31,29 @@ body {
     }
 }
 
+
+.animation:hover {
+    background-color: black;
+    animation: changeColor 5s infinite;
+    color:white;
+}
+
+@keyframes changeColor {
+    0% {
+        background-color: black;
+    }
+
+    50% {
+        background-color: white;
+    }
+
+    100% {
+        background-color: red;
+    }
+}
+
+
+
 .body-login {
     /*background: rgba(31, 132, 224, 0.07);*/
     border-radius: 16px;
@@ -58,6 +81,7 @@ body {
     .div-title h2 {
         color: white;
     }
+
 .h3-login {
     color: white;
 }
@@ -95,6 +119,8 @@ color:white;
 
 @charset "utf-8";
 /* Css Productos*/
+
+
 .card {
     display: flex;
     flex-direction: column;
@@ -118,12 +144,15 @@ color:white;
 }
 
 .card_foot {
-    background: #6699ff;
+    background: black;
     border-radius: 0 0 15px 15px;
     padding: 10px;
     text-align: center;
 }
+    
 
+
+/*
 .foot a {
     text-decoration: none;
     color: white;
@@ -138,7 +167,7 @@ color:white;
         z-index: 1;
         content: ""
     }
-
+    */
 .zoom {
     background-color: transparent;
     transition: transform .2s;
@@ -147,11 +176,36 @@ color:white;
     margin: 0 auto;
 }
 
-    .zoom:hover {
-        -ms-transform: scale(1.1); /* IE 9 */
-        -webkit-transform: scale(1.1); /* Safari 3-8 */
+.zoom:hover {
+        animation: shadow-pop-br 0.3s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+}
+
+.zoom-2 {
+    background-color: transparent;
+    transition: transform .2s;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+}
+
+.zoom-2:hover {
+        
+         -ms-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
         transform: scale(1.1);
     }
+
+@keyframes shadow-pop-br {
+    0% {
+        box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
+        transform: translateX(0) translateY(0);
+    }
+
+    100% {
+        box-shadow: 1px 1px #3e3e3e, 2px 2px #3e3e3e, 3px 3px #3e3e3e, 4px 4px #3e3e3e, 5px 5px #3e3e3e, 6px 6px #3e3e3e, 7px 7px #3e3e3e, 8px 8px #3e3e3e;
+        transform: translateX(-8px) translateY(-8px);
+    }
+}
 
 .carousel-inner {
     width: auto;

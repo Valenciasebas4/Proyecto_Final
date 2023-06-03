@@ -1,0 +1,89 @@
+﻿@model Proyecto_Final.Models.HomeViewModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+
+
+
+<div class="container">
+    <main role="main" class="pb-3 p-3">
+        @if (Model.Quantity > 0)
+        {
+
+            <a class="nav-link text-dark" asp-action="ShowCartAndConfirm">
+                <i class="fa fa-shopping-cart"></i>
+                <img class=" text-center" src="~/images/cart-shop.png" alt="" width="75" height="60">
+                (@Model.Quantity)
+            </a>
+
+        }
+
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <div class="text-center">
+                <h1 class="display-4">Bienvenidos @ViewBag.UserFullName a la administración de ECommerce</h1>
+            </div>
+        }
+        else
+        {
+            <div style="text-align: center;">
+                <h3>Productos</h3>
+                <hr>
+            </div>
+
+            @foreach (var group in Model.Products.Select((item, index) => new { Item = item, Index = index })
+           .GroupBy(x => x.Index / 4))
+            {
+                <div class="row p-4" style="text-align: center;">
+                    @foreach (var item in group.Select(g => g.Item))
+                    {
+                        if (item != null)
+                        {
+                            if (item.Stock < 1)
+                            {
+                                <div class="col-md-3">
+                                    <div class="card zoom shadow-pop-br">
+                                        <div class="card_title">@item.Name</div>
+                                        <div class="card_body">
+                                            <img src="@item.ImageFullPath" style="height:150px; max-width:280px;" class="zoom-2" />
+                                            <p class="mt-2">
+                                                @item.Description
+                                                <h4 class="text-danger">Producto no disponible</h4>
+                                            </p>
+                                        </div>
+                                        <div class="card_foot">
+                                            <button asp-action="DetailsProduct" asp-route-productId="@item.Id" class="btn btn-secondary" disabled>Detalles</button>
+                                            <button asp-action="AddProductInCart" asp-route-productId="@item.Id" class="btn btn-primary" disabled>Agregar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-3 ">
+                                    <div class="card zoom shadow-pop-br animation">
+                                        <div class="card_title">@item.Name</div>
+                                        <div class="card_body">
+                                            <img src="@item.ImageFullPath" style="height:150px; max-width:280px;" class="zoom-2" />
+                                            <p class="mt-2">
+                                                @item.Description
+                                                <h4>@Html.DisplayFor(modelItem => item.Price)</h4>
+                                            </p>
+                                        </div>
+                                        <div class="card_foot">
+                                            <a asp-action="DetailsProduct" asp-route-productId="@item.Id" class="btn btn-secondary">Detalles</a>
+                                            <a asp-action="AddProductInCart" asp-route-productId="@item.Id" class="btn btn-primary">Agregar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            }
+        }
+    </main>
+</div>
+
+

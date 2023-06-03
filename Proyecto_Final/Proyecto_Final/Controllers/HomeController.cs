@@ -25,14 +25,22 @@ namespace Proyecto_Final.Controllers
             _userHelper = userHelper;
             _orderHelper = orderHelper;
         }
-
+        
         public async Task<IActionResult> Index()
         {
+
+
+            return View();
+        }
+        
+
+        public async Task<IActionResult> ViewProducts()
+        {
             List<Product>? products = await _context.Products
-                .Include(p => p.ProductImages)
-                .Include(p => p.ProductCategories)
-                .OrderBy(p => p.Description)
-                .ToListAsync();
+                 .Include(p => p.ProductImages)
+                 .Include(p => p.ProductCategories)
+                 .OrderBy(p => p.Description)
+                 .ToListAsync();
 
             //Variables de Sesión
             ViewBag.UserFullName = GetUserFullName();
@@ -52,6 +60,8 @@ namespace Proyecto_Final.Controllers
 
             return View(homeViewModel);
         }
+
+
 
         private string GetUserFullName()
         {
@@ -116,7 +126,7 @@ namespace Proyecto_Final.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ViewProducts));
         }
 
         public async Task<IActionResult> DetailsProduct(Guid? productId)
@@ -190,7 +200,8 @@ namespace Proyecto_Final.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            
+            return RedirectToAction(nameof(ViewProducts));
         }
 
         [Authorize] //Etiqueta para que solo usuarios logueados puedan acceder a este método.
@@ -332,5 +343,49 @@ namespace Proyecto_Final.Controllers
             ModelState.AddModelError(string.Empty, response.Message);
             return View(showCartViewModel);
         }
+
+
+        /*
+        [Authorize]
+        public IActionResult OrderSuccess(ShowCartViewModel showCartViewModel)
+        {
+            //var showCartViewModel = TempData["showCartViewModel"] as ShowCartViewModel;
+
+            //if (showCartViewModel == null) return RedirectToAction(nameof(ShowCartAndConfirm));
+
+            OrderSuccessViewModel orderSuccessViewModel = new()
+            {
+                Quantity = showCartViewModel.Quantity,
+                Price = showCartViewModel.Value
+            };
+            return View(orderSuccessViewModel);
+        }
+        */
+        /*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ShowCartAndConfirm(ShowCartViewModel showCartViewModel)
+        {
+            User user = await _userHelper.GetUserAsync(User.Identity.Name);
+            if (user == null) return NotFound();
+
+            showCartViewModel.User = user;
+            showCartViewModel.TemporalSales = await _context.TemporalSales
+                .Include(ts => ts.Product)
+                .ThenInclude(p => p.ProductImages)
+                .Where(ts => ts.User.Id == user.Id)
+            .ToListAsync();
+
+            Response response = await _orderHelper.ProcessOrderAsync(showCartViewModel);
+            if (response.IsSuccess)
+            {
+                OrderSuccess(showCartViewModel);
+                TempData["showCartViewModel"] = showCartViewModel;
+                return RedirectToAction(nameof(OrderSuccess));
+            }
+
+            ModelState.AddModelError(string.Empty, response.Message);
+            return View(showCartViewModel);
+        }*/
     }
 }
