@@ -1,5 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Final.DAL;
 using Proyecto_Final.DAL.Entities;
@@ -7,63 +13,61 @@ using Proyecto_Final.DAL.Entities;
 namespace Proyecto_Final.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CategoriesController : Controller
+    public class TrainingsController : Controller
     {
-
         private readonly DataBaseContext _context;
 
-        public CategoriesController(DataBaseContext context)
+        public TrainingsController(DataBaseContext context)
         {
             _context = context;
         }
 
-        // GET: Categories
+        // GET: Trainings
         public async Task<IActionResult> Index()
         {
-            return _context.Categories != null ?
-                        View(await _context.Categories.ToListAsync()) :
-                        Problem("Entity set 'DataBaseContext.Categories'  is null.");
+            return _context.Trainings != null ?
+                      View(await _context.Trainings.ToListAsync()) :
+                      Problem("Entity set 'DataBaseContext.Trainings'  is null.");
         }
 
-        // GET: Categories/Details/5
+        // GET: Trainings/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Trainings == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
+            var training = await _context.Trainings
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (category == null)
+            if (training == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(training);
         }
 
-
-        // GET: Categories/Create
-        [HttpGet]
+        // GET: Trainings/Create
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Trainings/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create(Category category)
+        public async Task<IActionResult> Create(Training training)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    category.CreatedDate = DateTime.Now;
-                    _context.Add(category);
+                    training.CreatedDate = DateTime.Now;
+                    _context.Add(training);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
 
@@ -71,7 +75,7 @@ namespace Proyecto_Final.Controllers
                 catch (DbUpdateException dbUpdateException)
                 {
                     if (dbUpdateException.InnerException.Message.Contains("duplicate"))
-                        ModelState.AddModelError(string.Empty, "Ya existe una categoria con el mismo nombre.");
+                        ModelState.AddModelError(string.Empty, "Ya existe un entrenamiento con el mismo nombre.");
                     else
                         ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
                 }
@@ -80,45 +84,48 @@ namespace Proyecto_Final.Controllers
                     ModelState.AddModelError(string.Empty, exception.Message);
                 }
             }
-            return View(category);
+            return View(training);
         }
 
-        // GET: Category/Edit/5
-        //[Authorize(Roles = "Admin")]
+        // GET: Trainings/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null || _context.Categories == null) return NotFound();
+            if (id == null || _context.Trainings == null) return NotFound();
 
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null) return NotFound();
 
-            return View(category);
+
+            var training = await _context.Trainings.FindAsync(id);
+            if (training == null)
+            {
+                return NotFound();
+            }
+            return View(training);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Trainings/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // POST: Categories/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(Guid id, Category category)
+        public async Task<IActionResult> Edit(Guid id, Training training)
         {
-            if (id != category.Id) return NotFound();
+            if (id != training.Id) return NotFound();
+           
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    category.ModifiedDate = DateTime.Now;
-                    _context.Update(category);
+                    training.ModifiedDate = DateTime.Now;
+                    _context.Update(training);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateException dbUpdateException)
                 {
                     if (dbUpdateException.InnerException.Message.Contains("duplicate"))
-                        ModelState.AddModelError(string.Empty, "Ya existe una categoria con el mismo nombre.");
+                        ModelState.AddModelError(string.Empty, "Ya existe un entrenamiento con el mismo nombre.");
                     else
                         ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
                 }
@@ -127,37 +134,41 @@ namespace Proyecto_Final.Controllers
                     ModelState.AddModelError(string.Empty, exception.Message);
                 }
             }
-            return View(category);
+            return View(training);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Trainings/Delete/5
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null || _context.Categories == null) return NotFound();
+            if (id == null || _context.Trainings == null) return NotFound();
 
-            var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
+            var training = await _context.Trainings
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (training == null) return NotFound();
 
-            if (category == null) return NotFound();
-
-            return View(category);
+            return View(training);
         }
 
-        // POST: Categories/Delete/5
+
+        // POST: Trainings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Categories == null)
-                return Problem("Entity set 'DataBaseContext.Categories' is null.");
+            if (_context.Trainings == null)
+                return Problem("Entity set 'DataBaseContext.Trainings' is null.");
 
-            var category = await _context.Categories.FindAsync(id); //Select * From Categories Where Id = '7a216d04-3048-4757-9b02-f72ded5180bf'
-            if (category != null) _context.Categories.Remove(category);
+            var training = await _context.Trainings.FindAsync(id); 
+            if (training != null) _context.Trainings.Remove(training);
 
-            await _context.SaveChangesAsync(); //Delete From Categories where Id = '7a216d04-3048-4757-9b02-f72ded5180bf'
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
+
+
+       
     }
 }

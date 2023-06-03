@@ -15,6 +15,6 @@ namespace Proyecto_Final.DAL.Entities
         [Display(Name = "Descripción")]
         public string? Description { get; set; }
 
-        //public ICollection<ProductCategory> ProductCategories { get; set; }
+        public ICollection<ProductCategory> ProductCategories { get; set; }
     }
 }

@@ -458,6 +458,39 @@ namespace Proyecto_Final.Migrations
                     b.ToTable("TemporalSales");
                 });
 
+            modelBuilder.Entity("Proyecto_Final.DAL.Entities.Training", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid?>("TrainingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("TrainingId");
+
+                    b.ToTable("Trainings");
+                });
+
             modelBuilder.Entity("Proyecto_Final.DAL.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -653,7 +686,7 @@ namespace Proyecto_Final.Migrations
             modelBuilder.Entity("Proyecto_Final.DAL.Entities.ProductCategory", b =>
                 {
                     b.HasOne("Proyecto_Final.DAL.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("ProductCategories")
                         .HasForeignKey("CategoryId");
 
                     b.HasOne("Proyecto_Final.DAL.Entities.Product", "Product")
@@ -698,6 +731,13 @@ namespace Proyecto_Final.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Proyecto_Final.DAL.Entities.Training", b =>
+                {
+                    b.HasOne("Proyecto_Final.DAL.Entities.Training", null)
+                        .WithMany("Trainings")
+                        .HasForeignKey("TrainingId");
+                });
+
             modelBuilder.Entity("Proyecto_Final.DAL.Entities.User", b =>
                 {
                     b.HasOne("Proyecto_Final.DAL.Entities.City", "City")
@@ -705,6 +745,11 @@ namespace Proyecto_Final.Migrations
                         .HasForeignKey("CityId");
 
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("Proyecto_Final.DAL.Entities.Category", b =>
+                {
+                    b.Navigation("ProductCategories");
                 });
 
             modelBuilder.Entity("Proyecto_Final.DAL.Entities.City", b =>
@@ -739,6 +784,11 @@ namespace Proyecto_Final.Migrations
             modelBuilder.Entity("Proyecto_Final.DAL.Entities.TemporalSale", b =>
                 {
                     b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("Proyecto_Final.DAL.Entities.Training", b =>
+                {
+                    b.Navigation("Trainings");
                 });
 #pragma warning restore 612, 618
         }

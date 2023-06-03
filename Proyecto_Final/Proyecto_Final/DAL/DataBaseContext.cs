@@ -23,6 +23,8 @@ namespace Proyecto_Final.DAL
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
+        public DbSet<Training> Trainings { get; set; }
+
         /*Indicies para las tablas*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 
@@ -34,6 +36,7 @@ namespace Proyecto_Final.DAL
             modelBuilder.Entity<City>().HasIndex("Name", "StateId").IsUnique(); // Para estos casos, debo crear un índice Compuesto
             modelBuilder.Entity<Product>().HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<ProductCategory>().HasIndex("ProductId", "CategoryId").IsUnique();
+            modelBuilder.Entity<Training>().HasIndex(c => c.Name).IsUnique();
 
         }
     }
