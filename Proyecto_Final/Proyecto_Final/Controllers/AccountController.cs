@@ -26,6 +26,17 @@ namespace Proyecto_Final.Controllers
         }
 
 
+        public async Task<IActionResult> Index()
+        {
+            
+
+            return View();
+        }
+
+
+
+
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -129,6 +140,54 @@ namespace Proyecto_Final.Controllers
             addUserViewModel.States = await _ddlHelper.GetDDLStatesAsync(addUserViewModel.CountryId);
             addUserViewModel.Cities = await _ddlHelper.GetDDLCitiesAsync(addUserViewModel.StateId);
         }
+
+
+        public async Task<IActionResult> UserProfile()
+        {
+            // Obtener el usuario actual
+            User user = await _userHelper.GetUserAsync(User.Identity.Name);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Obtener el nombre del país
+            string countryName = await _ddlHelper.GetCountryNameAsync(user.City.State.Country.Id);
+
+            // Obtener el nombre del estado
+            string stateName = await _ddlHelper.GetStateNameAsync(user.City.State.Id);
+
+            // Obtener el nombre de la ciudad
+            string cityName = await _ddlHelper.GetCityNameAsync(user.City.Id);
+
+            // Preparar los datos necesarios para la vista
+            UserProfileViewModel userProfileViewModel = new UserProfileViewModel
+            {
+                Address = user.Address,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                ImageId = user.ImageId,
+                Cities = await _ddlHelper.GetDDLCitiesAsync(user.City.State.Id),
+                CityId = user.City.Id,
+                Countries = await _ddlHelper.GetDDLCountriesAsync(),
+                CountryId = user.City.State.Country.Id,
+                States = await _ddlHelper.GetDDLStatesAsync(user.City.State.Country.Id),
+                StateId = user.City.State.Id,
+                Id = Guid.Parse(user.Id),
+                Document = user.Document,
+                CountryName = countryName,
+                StateName = stateName,
+                CityName = cityName
+            };
+
+            // Resto del código...
+
+            // Retornar la vista con los datos
+            return View(userProfileViewModel);
+        }
+
 
         // Get - vista de editar Usuario
         public async Task<IActionResult> EditUser()

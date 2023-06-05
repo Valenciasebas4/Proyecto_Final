@@ -1,0 +1,69 @@
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Proyecto_Final.DAL.Entities;
+using Proyecto_Final.Utilities;
+using System.ComponentModel.DataAnnotations;
+
+namespace Proyecto_Final.Models
+{
+    public class UserProfileViewModel : Entity
+    {
+
+
+        [Display(Name = "Documento")]
+        [MaxLength(20, ErrorMessage = "El campo {0} debe tener máximo {1} caracteres.")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        public string Document { get; set; }
+
+        [Display(Name = "Nombres")]
+        [MaxLength(50, ErrorMessage = "El campo {0} debe tener máximo {1} caracteres.")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Apellidos")]
+        [MaxLength(50, ErrorMessage = "El campo {0} debe tener máximo {1} caracteres.")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Dirección")]
+        [MaxLength(200, ErrorMessage = "El campo {0} debe tener máximo {1} caracteres.")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        public string Address { get; set; }
+
+        [Display(Name = "Teléfono")]
+        [MaxLength(20, ErrorMessage = "El campo {0} debe tener máximo {1} caracteres.")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "Foto")]
+        public Guid ImageId { get; set; }
+
+        [Display(Name = "Foto")]
+        public string ImageFullPath => ImageId == Guid.Empty
+            ? $"https://localhost:7048/images/NoImage.png"
+            : $"https://sales2023.blob.core.windows.net/users/{ImageId}";
+
+        [Display(Name = "Image")]
+        public IFormFile ImageFile { get; set; }
+
+        [Display(Name = "País")]
+        [NonEmptyGuid(ErrorMessage = "Debes de seleccionar un país.")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        public Guid CountryId { get; set; }
+
+        public IEnumerable<SelectListItem> Countries { get; set; }
+
+        [Display(Name = "Departamento/Estado")]
+        [NonEmptyGuid(ErrorMessage = "Debes de seleccionar un estado.")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        public Guid StateId { get; set; }
+
+        public IEnumerable<SelectListItem> States { get; set; }
+
+        [Display(Name = "Ciudad")]
+        [NonEmptyGuid(ErrorMessage = "Debes de seleccionar una ciudad.")]
+        public Guid CityId { get; set; }
+
+        public IEnumerable<SelectListItem> Cities { get; set; }
+  
+    }
+}

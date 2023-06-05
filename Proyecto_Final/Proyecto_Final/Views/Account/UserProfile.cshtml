@@ -1,0 +1,114 @@
+﻿@model Proyecto_Final.Models.UserProfileViewModel
+@{
+    ViewData["Title"] = "UserProfile";
+}
+
+
+
+<div class="container text-center">
+    <main role="main" class="pb-3 p-3">
+        <h2>Mi perfil</h2>
+        <hr />
+        @if (Model != null)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="@Model.ImageFullPath" style="width:300px;height:300px;border-radius:50%" />
+                </div>
+                <div class="col-md-8">
+                    <dl class="row">
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </dt>
+                        <dd class="col-sm-8">
+                            <spam class="form-control">@Html.DisplayFor(model => model.FirstName)</spam>
+                            
+                        </dd>
+
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </dt>
+                        <dd class="col-sm-8">
+                            <spam class="form-control">@Html.DisplayFor(model => model.LastName)</spam>
+                            
+                        </dd>
+
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Address)
+                        </dt>
+                        <dd class="col-sm-8">
+                            <spam class="form-control">@Html.DisplayFor(model => model.Address)</spam>
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </dt>
+                        <dd class="col-sm-8">
+                            <spam class="form-control"> @Html.DisplayFor(model => model.PhoneNumber)</spam>                          
+                        </dd>
+
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.CountryId)
+                        </dt>
+                        <dd class="col-sm-8">
+                            <select asp-for="CountryId" asp-items="Model.Countries" class="form-control" disabled></select>
+                            <span asp-validation-for="CountryId" class="text-danger"></span>
+                        </dd>
+
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.StateId)
+                        </dt>
+                         <dd class="col-sm-8">
+                            <select asp-for="StateId" asp-items="Model.States" class="form-control" disabled></select>
+                            <span asp-validation-for="StateId" class="text-danger"></span>
+                        </dd>
+
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.CityId)
+                        </dt>
+                        <dd class="col-sm-8">
+                            <select asp-for="CityId" asp-items="Model.Cities" class="form-control" disabled></select>
+                            <span asp-validation-for="CityId" class="text-danger"></span>
+                        </dd>
+                       <div class="form-group mt-2">
+                            <a asp-action="EditUser" asp-controller="Account" class="btn btn-outline-success">Editar Usuario</a>
+                        </div>
+                         <!--
+                        <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.CityId)
+                        </dt>
+                        <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.CityId)
+                        </dd>
+
+                        <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.CountryId)
+                        </dt>
+                        <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.CountryId)
+                        </dd>
+
+                        <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.StateId)
+                        </dt>
+                        <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.StateId)
+                        </dd>
+
+                        <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Document)
+                        </dt>
+                        <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Document)
+                        </dd>
+                        -->
+                    </dl>
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <p>User profile not found.</p>
+        }
+    </main>
+</div>
