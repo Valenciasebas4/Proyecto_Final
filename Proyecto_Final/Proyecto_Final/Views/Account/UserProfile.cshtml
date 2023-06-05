@@ -6,8 +6,10 @@
 
 
 <div class="container text-center">
-    <main role="main" class="pb-3 p-3">
-        <h2>Mi perfil</h2>
+    <main role="main" class="pb-3 p-3 ">
+        <div class="text-center rounded-pill div-title">
+            <h2>Mi perfil</h2>
+        </div>
         <hr />
         @if (Model != null)
         {
@@ -70,37 +72,8 @@
                             <span asp-validation-for="CityId" class="text-danger"></span>
                         </dd>
                        <div class="form-group mt-2">
-                            <a asp-action="EditUser" asp-controller="Account" class="btn btn-outline-success">Editar Usuario</a>
-                        </div>
-                         <!--
-                        <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.CityId)
-                        </dt>
-                        <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.CityId)
-                        </dd>
-
-                        <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.CountryId)
-                        </dt>
-                        <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.CountryId)
-                        </dd>
-
-                        <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.StateId)
-                        </dt>
-                        <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.StateId)
-                        </dd>
-
-                        <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.Document)
-                        </dt>
-                        <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.Document)
-                        </dd>
-                        -->
+                            <a asp-action="EditUser" asp-controller="Account" class="btn btn-primary">Editar Usuario</a>
+                        </div>                        
                     </dl>
                 </div>
             </div>

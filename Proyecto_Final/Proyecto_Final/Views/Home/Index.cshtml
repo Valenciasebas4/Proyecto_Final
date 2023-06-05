@@ -12,13 +12,93 @@
 
         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
         {
-            <div class="text-center">
+            <div class="text-center rounded-pill" style="background: linear-gradient(to right, #f05053 60%, #e1eec3); ">
                 <h1 class="display-4">Bienvenidos @ViewBag.UserFullName a la administración de ECommerce</h1>
             </div>
         }
         else
         {
-            
+
+
+
+            <div class="px-4 py-5 my-5 text-center rounded-pill" style="background: linear-gradient(to right, #f05053 60%, #e1eec3); ">
+                <h1 class="display-5 fw-bold">Bienvenido a Nuestra Tienda</h1>
+                <div class="col-lg-6 mx-auto">
+                    <p class="lead mb-4">En nuestra tienda, nos enorgullece ofrecer productos y servicios de alta calidad para satisfacer las necesidades de nuestros clientes. Nuestro objetivo es proporcionar una experiencia de compra excepcional y un servicio al cliente de primera clase.</p>
+
+                </div>
+            </div>
+
+
+
+
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#000" /></svg>
+
+                        <div class="container">
+                            <div class="carousel-caption text-start">
+                                <h2>Por qué elegirnos</h2>
+
+                                <ul>
+                                    <li>Calidad superior: Nuestros productos están fabricados con los mejores materiales y están diseñados para durar.</li>
+                                    <li>Variedad de opciones: Ofrecemos una amplia gama de productos para que puedas encontrar exactamente lo que estás buscando.</li>
+                                    <li>Atención al cliente excepcional: Nuestro equipo de atención al cliente está siempre dispuesto a ayudarte y responder a todas tus preguntas.</li>
+                                    <li>Envío rápido y seguro: Nos aseguramos de que tus pedidos lleguen a tiempo y en perfectas condiciones.</li>
+                                    <li>Precios competitivos: Ofrecemos precios justos y competitivos para que obtengas el mejor valor por tu dinero.</li>
+                                    <li>Experiencia confiable: Llevamos muchos años en el negocio y hemos ganado la confianza de nuestros clientes.</li>
+                                </ul>
+                                <div class="form-group mt-2">
+                                    <a asp-action="ViewProducts" asp-controller="Home" class="btn btn-lg btn-primary">Productos</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
+
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h1>Another example headline.</h1>
+                                <p>Some representative placeholder content for the second slide of the carousel.</p>
+                                <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
+
+                        <div class="container">
+                            <div class="carousel-caption text-end">
+                                <h1>One more for good measure.</h1>
+                                <p>Some representative placeholder content for the third slide of this carousel.</p>
+                                <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+        
+
+
+
+
+           
         }
     </main>
 </div>
