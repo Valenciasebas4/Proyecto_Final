@@ -28,7 +28,7 @@ namespace Proyecto_Final.Controllers
         
         public async Task<IActionResult> Index()
         {
-
+            ViewBag.UserFullName = GetUserFullName();
 
             return View();
         }
@@ -74,6 +74,7 @@ namespace Proyecto_Final.Controllers
 
         public IActionResult Privacy()
         {
+            
             return View();
         }
 

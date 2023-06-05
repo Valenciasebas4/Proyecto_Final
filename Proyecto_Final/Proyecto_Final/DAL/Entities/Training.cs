@@ -20,6 +20,6 @@ namespace Proyecto_Final.DAL.Entities
         // Otras propiedades adicionales relacionadas con el registro de entrenamientos.
 
         // Puedes tener una colección de entrenamientos relacionados si es necesario.
-       
+         public ICollection<TrainingUser> TrainingsUser { get; set; }
     }
 }

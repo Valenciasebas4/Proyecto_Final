@@ -22,6 +22,7 @@ namespace Proyecto_Final.DAL
         {
             await _context.Database.EnsureCreatedAsync();
             await PopulateCategoriesAsync();
+            await PopulateTrainingsAsync();
             await PopulateCountriesStatesCitiesAsync();
             await PopulateRolesAsync();
             await PopulateProductAsync();
@@ -42,6 +43,17 @@ namespace Proyecto_Final.DAL
                 _context.Categories.Add(new Category { Name = "Accesorios de gimnasio", Description = "Cinturones, guantes, bandas elásticas", CreatedDate = DateTime.Now });
                 _context.Categories.Add(new Category { Name = "Suplementos", Description = "Proteínas, creatina, quemadores de grasa", CreatedDate = DateTime.Now });
                 _context.Categories.Add(new Category { Name = "Ropa deportiva", Description = "Camisetas, pantalones, zapatillas", CreatedDate = DateTime.Now });
+            }
+        }
+
+        private async Task PopulateTrainingsAsync()
+        {
+            if (!_context.Trainings.Any())
+            {
+
+                _context.Trainings.Add(new Training { Name = "Pierna", Description = "", CreatedDate = DateTime.Now });
+                _context.Trainings.Add(new Training { Name = "Abdomen", Description = "", CreatedDate = DateTime.Now });
+                _context.Trainings.Add(new Training { Name = "Cardio", Description = "", CreatedDate = DateTime.Now });
             }
         }
 
