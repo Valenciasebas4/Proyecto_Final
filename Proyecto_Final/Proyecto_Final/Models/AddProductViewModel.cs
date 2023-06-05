@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Proyecto_Final.DAL.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto_Final.Models

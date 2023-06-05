@@ -6,7 +6,7 @@
 
 
 
-<div class="container">
+<div class="">
     <main role="main" class="pb-3 p-3">
         
 
@@ -19,29 +19,27 @@
         else
         {
 
-
-
-            <div class="px-4 py-5 my-5 text-center rounded-pill" style="background: linear-gradient(to right, #f05053 60%, #e1eec3); ">
+            <div class="px-4 py-5 my-5 text-center  title-index container-sm ">
                 <h1 class="display-5 fw-bold">Bienvenido a Nuestra Tienda</h1>
                 <div class="col-lg-6 mx-auto">
                     <p class="lead mb-4">En nuestra tienda, nos enorgullece ofrecer productos y servicios de alta calidad para satisfacer las necesidades de nuestros clientes. Nuestro objetivo es proporcionar una experiencia de compra excepcional y un servicio al cliente de primera clase.</p>
-
                 </div>
             </div>
 
+            <div class="form-group mt-2 p-4 container text-center">
+                 <a asp-action="ViewProducts" asp-controller="Home" class="btn btn-lg btn-primary">COMPRA AQUÍ</a>
+             </div>
 
 
 
-            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div id="myCarousel" class="carousel slide rounded-pill" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#000" /></svg>
-
+                    <div class="carousel-item rounded-pill  active">
                         <div class="container">
                             <div class="carousel-caption text-start">
                                 <h2>Por qué elegirnos</h2>
@@ -54,15 +52,11 @@
                                     <li>Precios competitivos: Ofrecemos precios justos y competitivos para que obtengas el mejor valor por tu dinero.</li>
                                     <li>Experiencia confiable: Llevamos muchos años en el negocio y hemos ganado la confianza de nuestros clientes.</li>
                                 </ul>
-                                <div class="form-group mt-2">
-                                    <a asp-action="ViewProducts" asp-controller="Home" class="btn btn-lg btn-primary">Productos</a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
-
+                    <div class="carousel-item rounded-pill ">
                         <div class="container">
                             <div class="carousel-caption">
                                 <h1>Another example headline.</h1>
@@ -71,9 +65,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
-
+                    <div class="carousel-item rounded-pill ">
                         <div class="container">
                             <div class="carousel-caption text-end">
                                 <h1>One more for good measure.</h1>

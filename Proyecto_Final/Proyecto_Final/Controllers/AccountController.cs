@@ -152,14 +152,7 @@ namespace Proyecto_Final.Controllers
                 return NotFound();
             }
 
-            // Obtener el nombre del país
-            string countryName = await _ddlHelper.GetCountryNameAsync(user.City.State.Country.Id);
-
-            // Obtener el nombre del estado
-            string stateName = await _ddlHelper.GetStateNameAsync(user.City.State.Id);
-
-            // Obtener el nombre de la ciudad
-            string cityName = await _ddlHelper.GetCityNameAsync(user.City.Id);
+            
 
             // Preparar los datos necesarios para la vista
             UserProfileViewModel userProfileViewModel = new UserProfileViewModel
@@ -177,9 +170,7 @@ namespace Proyecto_Final.Controllers
                 StateId = user.City.State.Id,
                 Id = Guid.Parse(user.Id),
                 Document = user.Document,
-                CountryName = countryName,
-                StateName = stateName,
-                CityName = cityName
+                
             };
 
             // Resto del código...

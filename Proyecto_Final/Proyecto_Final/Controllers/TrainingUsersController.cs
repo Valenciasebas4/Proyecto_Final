@@ -7,16 +7,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Final.DAL;
 using Proyecto_Final.DAL.Entities;
+using Proyecto_Final.Enum;
+using Proyecto_Final.Helpers;
+using Proyecto_Final.Models;
+using Proyecto_Final.Services;
 
 namespace Proyecto_Final.Controllers
 {
     public class TrainingUsersController : Controller
     {
         private readonly DataBaseContext _context;
+        private readonly IDropDownListHelper _dropDownListHelper;
 
-        public TrainingUsersController(DataBaseContext context)
+        public TrainingUsersController(DataBaseContext context, IDropDownListHelper dropDownListHelper)
         {
             _context = context;
+            _dropDownListHelper = dropDownListHelper;
         }
 
         // GET: TrainingUsers
@@ -44,9 +50,15 @@ namespace Proyecto_Final.Controllers
         }
 
         // GET: TrainingUsers/Create
-        public IActionResult Create()
+        [HttpGet]
+        public async Task<IActionResult> Create()
         {
-            return View();
+            AddTrainingUserViewModel addTrainingUserViewModel = new()
+            {
+                Trainings = await _dropDownListHelper.GetDDLTrainingsAsync(),
+            };
+
+            return View(addTrainingUserViewModel);
         }
 
         // POST: TrainingUsers/Create
@@ -54,17 +66,33 @@ namespace Proyecto_Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClassDate,Id,CreatedDate,ModifiedDate")] TrainingUser trainingUser)
+        public async Task<IActionResult> Create(AddTrainingUserViewModel addTrainingUserViewModel)
         {
             if (ModelState.IsValid)
             {
-                trainingUser.Id = Guid.NewGuid();
+                
+                    TrainingUser trainingUser = new()
+                    {
+                        Training = (Training)await _dropDownListHelper.GetDDLTrainingsAsync(),
+                        ClassDate = DateTime.Now,
+                    };
+              
+                /*trainingUser.Id = Guid.NewGuid();
+                trainingUser.CreatedDate = DateTime.Now;
                 _context.Add(trainingUser);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));*/
             }
-            return View(trainingUser);
+            return View(addTrainingUserViewModel);
         }
+
+        private async Task FillDropDownListLocation(AddTrainingUserViewModel addTrainingUserViewModel)
+        {
+            addTrainingUserViewModel.Trainings = await _dropDownListHelper.GetDDLTrainingsAsync();
+            
+        }
+
+        
 
         // GET: TrainingUsers/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
@@ -87,7 +115,7 @@ namespace Proyecto_Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ClassDate,Id,CreatedDate,ModifiedDate")] TrainingUser trainingUser)
+        public async Task<IActionResult> Edit(Guid id, TrainingUser trainingUser)
         {
             if (id != trainingUser.Id)
             {

@@ -289,6 +289,12 @@ color:white;
 /* Declare heights because of positioning of img element */
 .carousel-item {
     height: 32rem;
+    background: rgba(24, 23, 23, 0.23);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.9px);
+    -webkit-backdrop-filter: blur(4.9px);
+    border: 1px solid rgba(24, 23, 23, 0.3);
 }
 
     .carousel-item > img {
@@ -298,3 +304,19 @@ color:white;
         min-width: 100%;
         height: 32rem;
     }
+
+#myCarousel {
+
+    background-image: url(../images/luna.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.title-index {
+    border-radius: 10px 80px 80px 10px;
+    background-image: url(../images/medusa.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color:white;
+}

@@ -155,6 +155,19 @@ namespace Proyecto_Final.Services
             return listCities;
         }
 
+        public Task<string> GetCountryNameAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<string> GetStateNameAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> GetCityNameAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
