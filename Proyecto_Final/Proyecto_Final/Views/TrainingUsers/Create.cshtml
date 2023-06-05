@@ -21,6 +21,11 @@
                         <select asp-for="TrainingId" asp-items="Model.Trainings" class="form-control"></select>
                         <span asp-validation-for="TrainingId" class="text-danger"></span>
                     </div>
+                    <div class="form-group">
+                        <label asp-for="DateClass" class="control-label"></label>
+                        <input asp-for="DateClass" class="form-control" />
+                        <span asp-validation-for="DateClass" class="text-danger"></span>
+                    </div>
 
             <br />
 

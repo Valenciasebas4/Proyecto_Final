@@ -18,11 +18,13 @@ namespace Proyecto_Final.Controllers
     {
         private readonly DataBaseContext _context;
         private readonly IDropDownListHelper _dropDownListHelper;
+        private readonly IUserHelper _userHelper;
 
-        public TrainingUsersController(DataBaseContext context, IDropDownListHelper dropDownListHelper)
+        public TrainingUsersController(DataBaseContext context, IUserHelper userHelper, IDropDownListHelper dropDownListHelper)
         {
             _context = context;
             _dropDownListHelper = dropDownListHelper;
+            _userHelper = userHelper;
         }
 
         // GET: TrainingUsers
@@ -65,24 +67,27 @@ namespace Proyecto_Final.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddTrainingUserViewModel addTrainingUserViewModel)
         {
             if (ModelState.IsValid)
             {
-                
-                    TrainingUser trainingUser = new()
+                User user = await _userHelper.GetUserAsync(User.Identity.Name);
+                TrainingUser trainingUser = new()
                     {
-                        Training = (Training)await _dropDownListHelper.GetDDLTrainingsAsync(),
-                        ClassDate = DateTime.Now,
+                        User = addTrainingUserViewModel.User,
+                        Training = addTrainingUserViewModel.Training,
+                        ClassDate = addTrainingUserViewModel.DateClass,
+                        CreatedDate = DateTime.Now,
                     };
-              
-                /*trainingUser.Id = Guid.NewGuid();
-                trainingUser.CreatedDate = DateTime.Now;
                 _context.Add(trainingUser);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));*/
+                return RedirectToAction(nameof(Index));
+                // Redirigir al usuario a una página de éxito o a otra acción según sea necesario
+               // return RedirectToAction("Index", "Home");
             }
+
+            // Si el modelo no es válido, regresar a la vista de creación con los errores de validación
+            addTrainingUserViewModel.Trainings = await _dropDownListHelper.GetDDLTrainingsAsync();
             return View(addTrainingUserViewModel);
         }
 

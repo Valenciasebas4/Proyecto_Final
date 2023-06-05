@@ -7,6 +7,8 @@ namespace Proyecto_Final.DAL.Entities
         //public int UserId { get; set; }
         public User User { get; set; }
 
+        [Display(Name = "Entrenamiento")]
+        //public int TrainingId { get; set; }
         public Training Training { get; set; }
 
         [Display(Name = "Fecha de clase")]

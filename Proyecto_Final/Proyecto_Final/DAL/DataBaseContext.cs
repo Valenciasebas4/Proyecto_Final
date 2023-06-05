@@ -39,7 +39,7 @@ namespace Proyecto_Final.DAL
             modelBuilder.Entity<Product>().HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<ProductCategory>().HasIndex("ProductId", "CategoryId").IsUnique();
             modelBuilder.Entity<Training>().HasIndex(c => c.Name).IsUnique();
-            modelBuilder.Entity<TrainingUser>().HasIndex("UserId", "TrainingId").IsUnique();
+            modelBuilder.Entity<TrainingUser>().HasIndex("User", "Training").IsUnique();
 
 
 
