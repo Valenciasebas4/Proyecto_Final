@@ -24,7 +24,7 @@ namespace Proyecto_Final.DAL
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
         public DbSet<Training> Trainings { get; set; }
-        public DbSet<TrainingUser> TrainingsUser { get; set; }
+        public DbSet<UserTraining> UserTrainings { get; set; }
 
 
         /*Indicies para las tablas*/
@@ -39,7 +39,7 @@ namespace Proyecto_Final.DAL
             modelBuilder.Entity<Product>().HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<ProductCategory>().HasIndex("ProductId", "CategoryId").IsUnique();
             modelBuilder.Entity<Training>().HasIndex(c => c.Name).IsUnique();
-            modelBuilder.Entity<TrainingUser>().HasIndex("UserId","TrainingId").IsUnique();
+            modelBuilder.Entity<UserTraining>().HasIndex(c => c.Id).IsUnique();
 
 
 

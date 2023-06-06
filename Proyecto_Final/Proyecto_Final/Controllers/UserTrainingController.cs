@@ -8,15 +8,15 @@ using Proyecto_Final.Services;
 
 namespace Proyecto_Final.Controllers
 {
-    public class TrainingUserController : Controller
+    public class UserTrainingController : Controller
     {
         private readonly DataBaseContext _context;
         private readonly IDropDownListHelper _dropDownListHelper;
         private readonly IUserHelper _userHelper;
 
-        public TrainingUserController(DataBaseContext context, IUserHelper userHelper, IDropDownListHelper dropDownListHelper)
+        public UserTrainingController(DataBaseContext context, IDropDownListHelper dropDownListHelper, IUserHelper userHelper)
         {
-            _context = context;         
+            _context = context;
             _dropDownListHelper = dropDownListHelper;
             _userHelper = userHelper;
         }
@@ -25,55 +25,59 @@ namespace Proyecto_Final.Controllers
             return View();
         }
 
-        public async Task<IActionResult> AddTrainingUser()
+
+        public async Task<IActionResult> Create()
         {
-            AddTrainingUserViewModel addTrainingUserViewModel = new()
+            AddUserTrainingViewModel addUserTrainingViewModel = new()
             {
                 Trainings = await _dropDownListHelper.GetDDLTrainingsAsync(),
             };
 
-            return View(addTrainingUserViewModel);
+            return View(addUserTrainingViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddTrainingUser(AddTrainingUserViewModel addTrainingUserViewModel)
+        public async Task<IActionResult> Create(AddUserTrainingViewModel addUserTrainingViewModel)
         {
             if (ModelState.IsValid)
             {
                 User user = await _userHelper.GetUserAsync(User.Identity.Name);
                 try
-                {
-                    TrainingUser trainingUser = new()
+                {                  
+                    UserTraining userTraining = new()
                     {
-                        UserId =  addTrainingUserViewModel.UserId,
-                        ClassDate = addTrainingUserViewModel.DateClass,
-                        Training = await _context.Trainings.FirstOrDefaultAsync(c => c.Id == addTrainingUserViewModel.TrainingId),
-                        //User = await _context.Users.FirstOrDefaultAsync(c => c.Id == addTrainingUserViewModel.UserId),
-                        //Cities = new List<City>(),
-                        //Country = await _context.Countries.FirstOrDefaultAsync(c => c.Id == stateViewModel.CountryId),
-                        //Name = stateViewModel.Name,
+                        
+                        DateOfClass = addUserTrainingViewModel.DateClass,
                         CreatedDate = DateTime.Now,
-                        ModifiedDate = null,
+                        Training = await _context.Trainings.FindAsync(addUserTrainingViewModel.TrainingId),
+                        User= user,
                     };
 
-                    _context.Add(trainingUser);
+
+                    _context.Add(userTraining);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateException dbUpdateException)
                 {
                     if (dbUpdateException.InnerException.Message.Contains("duplicate"))
-                        ModelState.AddModelError(string.Empty, "Ya existe un Dpto/Estado con el mismo nombre en este país.");
+                    {
+                        ModelState.AddModelError(string.Empty, "Ya existe un producto con el mismo nombre.");
+                    }
                     else
+                    {
                         ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
+                    }
                 }
                 catch (Exception exception)
                 {
                     ModelState.AddModelError(string.Empty, exception.Message);
                 }
             }
-            return View(addTrainingUserViewModel);
+
+            addUserTrainingViewModel.Trainings = await _dropDownListHelper.GetDDLTrainingsAsync();
+            return View(addUserTrainingViewModel);
         }
     }
 }

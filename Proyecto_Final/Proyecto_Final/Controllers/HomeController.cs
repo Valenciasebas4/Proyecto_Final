@@ -226,6 +226,8 @@ namespace Proyecto_Final.Controllers
             return View(showCartViewModel);
         }
 
+        
+
         public async Task<IActionResult> DecreaseQuantity(Guid? temporalSaleId)
         {
             if (temporalSaleId == null) return NotFound();
@@ -344,6 +346,8 @@ namespace Proyecto_Final.Controllers
             ModelState.AddModelError(string.Empty, response.Message);
             return View(showCartViewModel);
         }
+
+       
 
 
         /*

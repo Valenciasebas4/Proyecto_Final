@@ -12,8 +12,8 @@ using Proyecto_Final.DAL;
 namespace Proyecto_Final.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230606015527_newtableTrainingUser")]
-    partial class newtableTrainingUser
+    [Migration("20230606162626_NewEntityUserTraining")]
+    partial class NewEntityUserTraining
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -489,31 +489,6 @@ namespace Proyecto_Final.Migrations
                     b.ToTable("Trainings");
                 });
 
-            modelBuilder.Entity("Proyecto_Final.DAL.Entities.TrainingUser", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ClassDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("TrainingId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TrainingId");
-
-                    b.ToTable("TrainingsUser");
-                });
-
             modelBuilder.Entity("Proyecto_Final.DAL.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -614,6 +589,39 @@ namespace Proyecto_Final.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Proyecto_Final.DAL.Entities.UserTraining", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateOfClass")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("TrainingID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("TrainingID");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTrainings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -754,13 +762,6 @@ namespace Proyecto_Final.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Proyecto_Final.DAL.Entities.TrainingUser", b =>
-                {
-                    b.HasOne("Proyecto_Final.DAL.Entities.Training", null)
-                        .WithMany("TrainingsUser")
-                        .HasForeignKey("TrainingId");
-                });
-
             modelBuilder.Entity("Proyecto_Final.DAL.Entities.User", b =>
                 {
                     b.HasOne("Proyecto_Final.DAL.Entities.City", "City")
@@ -768,6 +769,23 @@ namespace Proyecto_Final.Migrations
                         .HasForeignKey("CityId");
 
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("Proyecto_Final.DAL.Entities.UserTraining", b =>
+                {
+                    b.HasOne("Proyecto_Final.DAL.Entities.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Proyecto_Final.DAL.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Training");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Proyecto_Final.DAL.Entities.Category", b =>
@@ -807,11 +825,6 @@ namespace Proyecto_Final.Migrations
             modelBuilder.Entity("Proyecto_Final.DAL.Entities.TemporalSale", b =>
                 {
                     b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("Proyecto_Final.DAL.Entities.Training", b =>
-                {
-                    b.Navigation("TrainingsUser");
                 });
 #pragma warning restore 612, 618
         }
