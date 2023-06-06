@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Final.DAL;
 using Proyecto_Final.DAL.Entities;
+using Proyecto_Final.Models;
 
 namespace Proyecto_Final.Controllers
 {
@@ -55,9 +56,7 @@ namespace Proyecto_Final.Controllers
             return View();
         }
 
-        // POST: Trainings/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Training training)
@@ -86,6 +85,8 @@ namespace Proyecto_Final.Controllers
             }
             return View(training);
         }
+
+       
 
         // GET: Trainings/Edit/5
         public async Task<IActionResult> Edit(Guid? id)

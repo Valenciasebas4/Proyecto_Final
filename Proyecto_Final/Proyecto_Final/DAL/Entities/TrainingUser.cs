@@ -4,11 +4,12 @@ namespace Proyecto_Final.DAL.Entities
 {
     public class TrainingUser : Entity
     {
-        //public int UserId { get; set; }
+        [Display(Name = "Usuario")]
+        public Guid UserId { get; set; }
         public User User { get; set; }
 
         [Display(Name = "Entrenamiento")]
-        //public int TrainingId { get; set; }
+        public Guid TrainingId { get; set; }
         public Training Training { get; set; }
 
         [Display(Name = "Fecha de clase")]

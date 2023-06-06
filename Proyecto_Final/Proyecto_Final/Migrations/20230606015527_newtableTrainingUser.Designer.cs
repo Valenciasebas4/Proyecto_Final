@@ -12,8 +12,8 @@ using Proyecto_Final.DAL;
 namespace Proyecto_Final.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230605215454_edittabletraininguser")]
-    partial class edittabletraininguser
+    [Migration("20230606015527_newtableTrainingUser")]
+    partial class newtableTrainingUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -507,14 +507,9 @@ namespace Proyecto_Final.Migrations
                     b.Property<Guid?>("TrainingId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TrainingId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("TrainingsUser");
                 });
@@ -761,17 +756,9 @@ namespace Proyecto_Final.Migrations
 
             modelBuilder.Entity("Proyecto_Final.DAL.Entities.TrainingUser", b =>
                 {
-                    b.HasOne("Proyecto_Final.DAL.Entities.Training", "Training")
+                    b.HasOne("Proyecto_Final.DAL.Entities.Training", null)
                         .WithMany("TrainingsUser")
                         .HasForeignKey("TrainingId");
-
-                    b.HasOne("Proyecto_Final.DAL.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Training");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Proyecto_Final.DAL.Entities.User", b =>

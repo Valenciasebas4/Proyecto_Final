@@ -6,9 +6,9 @@ namespace Proyecto_Final.Models
 {
     public class AddTrainingUserViewModel
     {
-        public User User { get; set; }
-        public Training Training { get; set; }
-
+        [Display(Name = "Usuario")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        public Guid UserId { get; set; }
         [Display(Name = "Entrenamiento")]
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public Guid TrainingId { get; set; }

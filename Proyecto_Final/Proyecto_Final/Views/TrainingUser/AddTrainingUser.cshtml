@@ -1,9 +1,7 @@
 ﻿@model Proyecto_Final.Models.AddTrainingUserViewModel
-
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "AddTrainingUser";
 }
-
 
 <div class="container">
     <main role="main" class="pb-3 p-3">
@@ -11,10 +9,10 @@
 
 
         <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="AddTrainingUser">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Trainings" />
                     <div class="form-group">
                         <label asp-for="TrainingId" class="control-label"></label>
@@ -23,19 +21,19 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="DateClass" class="control-label"></label>
-                        <input asp-for="DateClass" class="form-control" />
+                        <input asp-for="DateClass"  class="form-control" />
                         <span asp-validation-for="DateClass" class="text-danger"></span>
                     </div>
 
-            <br />
+                    <br />
 
-            <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-outline-primary" />
-                <a asp-action="Index" class="btn btn-outline-success">Regresar</a>
+                    <div class="form-group">
+                        <input type="submit" value="Crear" class="btn btn-outline-primary" />
+                        <a asp-action="Index" class="btn btn-outline-success">Regresar</a>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
 
     </main>
@@ -43,5 +41,7 @@
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
