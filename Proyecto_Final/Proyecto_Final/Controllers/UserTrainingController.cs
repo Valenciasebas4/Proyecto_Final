@@ -20,9 +20,14 @@ namespace Proyecto_Final.Controllers
             _dropDownListHelper = dropDownListHelper;
             _userHelper = userHelper;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+      
+            
+            return _context.UserTrainings != null ?
+                        View(await _context.UserTrainings.ToListAsync()) :
+                       Problem("Entity set 'DataBaseContext.UserTrainings'  is null.");
+            
         }
 
 
@@ -57,7 +62,7 @@ namespace Proyecto_Final.Controllers
 
                     _context.Add(userTraining);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof( Index));
                 }
                 catch (DbUpdateException dbUpdateException)
                 {

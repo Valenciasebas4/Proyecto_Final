@@ -1,4 +1,6 @@
-﻿namespace Proyecto_Final.DAL.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Proyecto_Final.DAL.Entities
 {
     public class UserTraining : Entity
     {
@@ -6,6 +8,7 @@
 
         public Guid TrainingID { get; set; }
 
+        [Display(Name = "Fecha de clase")]
         public DateTime? DateOfClass { get; set; }
 
         public virtual User User { get; set; }

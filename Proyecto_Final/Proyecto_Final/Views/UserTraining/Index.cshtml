@@ -1,7 +1,92 @@
-﻿
+﻿@model IEnumerable<Proyecto_Final.DAL.Entities.UserTraining>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
 
+<div class="container-m4">
+    <main role="main" class="pb-3 p-3">
+
+        <div class="panel-heading text-center">
+            <h1 class="text-center">Clases de entrenamiento</h1>
+
+            <p>
+                <a asp-action="Create" class="btn btn-outline-primary">Crear nueva Categoria</a>
+            </p>
+            <hr />
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover table-responsive table-striped" id="UserTrainingTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TrainingID)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DateOfClass)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.User.Id)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TrainingID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DateOfClass)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.User.Id)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Editar</a>
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">Detalles</a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#UserTrainingTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                },
+                "aLengthMenu": [
+                    [5, 25, 50, 100, 200, -1],
+                    [5, 25, 50, 100, 200, "Todos"]
+                ]
+            });
+        });
+    </script>
+}

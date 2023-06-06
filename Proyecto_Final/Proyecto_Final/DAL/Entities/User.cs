@@ -7,6 +7,7 @@ namespace Proyecto_Final.DAL.Entities
     public class User : IdentityUser
     {
         //public ICollection<Order> Orders { get; set; }
+        public ICollection<UserTraining> UserTrainings { get; set; }
         [Display(Name = "Fecha de creación")]
         public virtual DateTime? CreatedDate { get; set; }
 

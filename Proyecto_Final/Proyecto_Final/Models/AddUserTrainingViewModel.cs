@@ -10,7 +10,7 @@ namespace Proyecto_Final.Models
         [Display(Name = "Entrenamiento")]
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public Guid TrainingId { get; set; }
-
+        public string TrainingName { get; set; }
         public IEnumerable<SelectListItem> Trainings { get; set; }
         public DateTime DateClass { get; set; }
     }
