@@ -76,7 +76,7 @@ namespace Proyecto_Final.Controllers
 
         public IActionResult Privacy()
         {
-            
+            ViewBag.UserFullName = GetUserFullName();
             return View();
         }
 

@@ -40,9 +40,19 @@ namespace Proyecto_Final.Controllers
             return training;
         }
 
+        private string GetUserFullName()
+        {
+            return _context.Users
+                .Where(u => u.Email == User.Identity.Name)
+                .Select(u => u.FullName)
+                .FirstOrDefault();
+        }
+
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.UserFullName = GetUserFullName();
+
             ViewBag.TrainingName = GetTrainingName();
             ViewBag.UserId = GetUserId();
             
@@ -58,6 +68,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> Create()
         {
+            ViewBag.UserFullName = GetUserFullName();
             AddUserTrainingViewModel addUserTrainingViewModel = new()
             {
                 Trainings = await _dropDownListHelper.GetDDLTrainingsAsync(),

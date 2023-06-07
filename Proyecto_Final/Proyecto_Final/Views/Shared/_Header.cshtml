@@ -51,9 +51,7 @@
                     @if (User.Identity.IsAuthenticated)
 
                     {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserProfile">Mi perfil</a>
-                        </li>
+                        
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserProfile">@ViewBag.UserFullName</a>

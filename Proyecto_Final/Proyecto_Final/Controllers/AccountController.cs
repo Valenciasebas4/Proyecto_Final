@@ -141,12 +141,19 @@ namespace Proyecto_Final.Controllers
             addUserViewModel.Cities = await _ddlHelper.GetDDLCitiesAsync(addUserViewModel.StateId);
         }
 
+        private string GetUserFullName()
+        {
+            return _context.Users
+                .Where(u => u.Email == User.Identity.Name)
+                .Select(u => u.FullName)
+                .FirstOrDefault();
+        }
 
         public async Task<IActionResult> UserProfile()
         {
             // Obtener el usuario actual
             User user = await _userHelper.GetUserAsync(User.Identity.Name);
-
+            ViewBag.UserFullName = GetUserFullName();
             if (user == null)
             {
                 return NotFound();
@@ -184,7 +191,7 @@ namespace Proyecto_Final.Controllers
         public async Task<IActionResult> EditUser()
         {
             User user = await _userHelper.GetUserAsync(User.Identity.Name);
-
+            ViewBag.UserFullName = GetUserFullName();
             if (user == null) return NotFound();
 
             EditUserViewModel editUserViewModel = new()
@@ -248,6 +255,7 @@ namespace Proyecto_Final.Controllers
 
         public IActionResult ChangePassword()
         {
+            ViewBag.UserFullName = GetUserFullName();
             return View();
         }
         
