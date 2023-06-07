@@ -23,7 +23,7 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.TrainingID)
+                                        @Html.DisplayNameFor(model => model.Training.Name)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.DateOfClass)
@@ -39,7 +39,7 @@
                                     {
                                         <tr>
                                             <td>
-                                                @ViewBag.TrainingName
+                                                @Html.DisplayFor(modelItem => item.Training.Name)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.DateOfClass)

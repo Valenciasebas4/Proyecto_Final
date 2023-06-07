@@ -50,6 +50,7 @@ namespace Proyecto_Final.Controllers
             
             return _context.UserTrainings != null ?
                         View(await _context.UserTrainings.ToListAsync()) :
+                        
                        Problem("Entity set 'DataBaseContext.UserTrainings'  is null.");
             
         }
