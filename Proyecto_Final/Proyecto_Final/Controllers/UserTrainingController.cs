@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Final.DAL;
 using Proyecto_Final.DAL.Entities;
@@ -20,9 +21,32 @@ namespace Proyecto_Final.Controllers
             _dropDownListHelper = dropDownListHelper;
             _userHelper = userHelper;
         }
+
+        private string GetUserId()
+        {
+            return _context.Users
+                .Where(u => u.Email == User.Identity.Name)
+                .Select(u => u.Id)
+                .FirstOrDefault();
+        }
+        private string GetTrainingName()
+        {
+            string userId = GetUserId(); // Obtener el ID del usuario actual
+            var training = _context.UserTrainings
+                .Where(t => t.UserId == userId) // Filtrar por el ID del usuario
+                .Select(t => t.Training.Name)
+                .FirstOrDefault();
+
+            return training;
+        }
+
+
         public async Task<IActionResult> Index()
         {
-      
+            ViewBag.TrainingName = GetTrainingName();
+            ViewBag.UserId = GetUserId();
+            
+
             
             return _context.UserTrainings != null ?
                         View(await _context.UserTrainings.ToListAsync()) :

@@ -14,5 +14,6 @@ namespace Proyecto_Final.DAL.Entities
         public virtual User User { get; set; }
 
         public virtual Training Training { get; set; }
+        public string UserId { get; internal set; }
     }
 }

@@ -10,10 +10,6 @@
 
         <div class="panel-heading text-center">
             <h1 class="text-center">Clases de entrenamiento</h1>
-
-            <p>
-                <a asp-action="Create" class="btn btn-outline-primary">Crear nueva Categoria</a>
-            </p>
             <hr />
         </div>
 
@@ -32,31 +28,30 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.DateOfClass)
                                     </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.User.Id)
-                                    </th>
+
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TrainingID)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.DateOfClass)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.User.Id)
-                                        </td>
-                                        <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Editar</a>
-                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">Detalles</a>
-                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Eliminar</a>
-                                        </td>
-                                    </tr>
+                                    if (item.UserId == ViewBag.UserId) // Replace "UserId" with the appropriate property name
+                                    {
+                                        <tr>
+                                            <td>
+                                                @ViewBag.TrainingName
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DateOfClass)
+                                            </td>
+  
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Editar</a>
+                                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">Detalles</a>
+                                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Eliminar</a>
+                                            </td>
+                                        </tr>
+                                    }
                                 }
                             </tbody>
                         </table>

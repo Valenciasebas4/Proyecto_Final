@@ -72,6 +72,8 @@ namespace Proyecto_Final.Controllers
         }
 
 
+
+
         public IActionResult Privacy()
         {
             
