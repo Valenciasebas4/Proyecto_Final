@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Proyecto_Final.DAL.Entities
 {
     public class Product : Entity
     {
+        [JsonIgnore]
         public ICollection<OrderDetail> OrderDetails { get; set; }
 
         [Display(Name = "Nombre")]

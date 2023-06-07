@@ -1,10 +1,12 @@
-﻿using Proyecto_Final.Enum;
+﻿using Newtonsoft.Json;
+using Proyecto_Final.Enum;
 using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto_Final.DAL.Entities
 {
     public class Order : Entity
     {
+        [JsonIgnore]
         public User User { get; set; }
 
         [DataType(DataType.MultilineText)]

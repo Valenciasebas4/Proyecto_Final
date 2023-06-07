@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Proyecto_Final.Common;
 using Proyecto_Final.DAL;
 using Proyecto_Final.DAL.Entities;
@@ -325,9 +326,14 @@ namespace Proyecto_Final.Controllers
         [Authorize]
         public IActionResult OrderSuccess()
         {
+            //string serializedData = TempData["showCartViewModel"] as string;
+            //ShowCartViewModel showCartViewModel = JsonConvert.DeserializeObject<ShowCartViewModel>(serializedData);
+
+            // Realiza las acciones necesarias con el objeto showCartViewModel
+
             return View();
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ShowCartAndConfirm(ShowCartViewModel showCartViewModel)
@@ -348,9 +354,38 @@ namespace Proyecto_Final.Controllers
             ModelState.AddModelError(string.Empty, response.Message);
             return View(showCartViewModel);
         }
+        
 
-       
+        /*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ShowCartAndConfirm(ShowCartViewModel showCartViewModel)
+        {
+            User user = await _userHelper.GetUserAsync(User.Identity.Name);
+            if (user == null) return NotFound();
 
+            showCartViewModel.User = user;
+            showCartViewModel.TemporalSales = await _context.TemporalSales
+                .Include(ts => ts.Product)
+                .ThenInclude(p => p.ProductImages)
+                .Where(ts => ts.User.Id == user.Id)
+                .ToListAsync();
+
+            Response response = await _orderHelper.ProcessOrderAsync(showCartViewModel);
+            if (response.IsSuccess)
+            {
+                if (response.IsSuccess)
+                {
+                    string serializedData = JsonConvert.SerializeObject(showCartViewModel);
+                    TempData["showCartViewModel"] = serializedData;
+                    return RedirectToAction(nameof(OrderSuccess));
+                }
+            }
+
+            ModelState.AddModelError(string.Empty, response.Message);
+            return RedirectToAction(nameof(OrderSuccess), new { showCartViewModel });//
+        }
+        */
 
         /*
         [Authorize]
@@ -393,6 +428,7 @@ namespace Proyecto_Final.Controllers
 
             ModelState.AddModelError(string.Empty, response.Message);
             return View(showCartViewModel);
-        }*/
+        }
+        */
     }
 }

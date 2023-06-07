@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto_Final.DAL.Entities
 {
@@ -10,6 +11,7 @@ namespace Proyecto_Final.DAL.Entities
         public string Name { get; set; }
 
         [Display(Name = "Estado")]
+        [JsonIgnore]
         public State State { get; set; }
 
         [Display(Name = "Usuarios")]

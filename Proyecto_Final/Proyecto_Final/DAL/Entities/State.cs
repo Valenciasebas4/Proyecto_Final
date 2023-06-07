@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto_Final.DAL.Entities
 {
@@ -9,7 +10,8 @@ namespace Proyecto_Final.DAL.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Name { get; set; }
 
-        [Display(Name = "País")] 
+        [Display(Name = "País")]
+        [JsonIgnore]
         public Country Country { get; set; } //Relacion con País
 
         [Display(Name = "Ciudades")] 

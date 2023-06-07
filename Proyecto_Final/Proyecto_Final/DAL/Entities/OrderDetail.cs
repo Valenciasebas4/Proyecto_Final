@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto_Final.DAL.Entities
 {
     public class OrderDetail : Entity
     {
+        [JsonIgnore]
         public Order Order { get; set; }
 
         public TemporalSale? TemporalSale { get; set; }

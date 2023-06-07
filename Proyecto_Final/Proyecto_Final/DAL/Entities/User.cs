@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using Proyecto_Final.Enum;
 using System.ComponentModel.DataAnnotations;
 
@@ -47,6 +48,7 @@ namespace Proyecto_Final.DAL.Entities
         public UserType UserType { get; set; }
 
         [Display(Name = "Ciudad")]
+        [JsonIgnore]
         public City City { get; set; }
 
         //Propiedades de Lectura

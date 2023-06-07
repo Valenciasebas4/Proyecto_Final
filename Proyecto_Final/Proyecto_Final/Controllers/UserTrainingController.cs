@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Final.DAL;
@@ -65,7 +66,7 @@ namespace Proyecto_Final.Controllers
             
         }
 
-
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             ViewBag.UserFullName = GetUserFullName();

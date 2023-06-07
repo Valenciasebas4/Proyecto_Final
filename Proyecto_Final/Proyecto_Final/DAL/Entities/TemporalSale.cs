@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto_Final.DAL.Entities
 {
@@ -6,8 +7,10 @@ namespace Proyecto_Final.DAL.Entities
     {
         public ICollection<OrderDetail> OrderDetails { get; set; }
 
+        [JsonIgnore]
         public User User { get; set; }
 
+        [JsonIgnore]
         public Product Product { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N2}")]
