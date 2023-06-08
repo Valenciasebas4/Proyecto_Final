@@ -6,6 +6,7 @@ using Proyecto_Final.DAL;
 using Proyecto_Final.Helpers;
 using System.Data;
 using Proyecto_Final.Models;
+using Vereyon.Web;
 
 namespace Proyecto_Final.Controllers
 {
@@ -15,12 +16,14 @@ namespace Proyecto_Final.Controllers
         private readonly DataBaseContext _context;
         private readonly IAzureBlobHelper _azureBlobHelper;
         private readonly IDropDownListHelper _dropDownListHelper;
+        private readonly IFlashMessage _flashMessage;
 
-        public ProductsController(DataBaseContext context, IAzureBlobHelper azureBlobHelper, IDropDownListHelper dropDownListHelper)
+        public ProductsController(DataBaseContext context, IAzureBlobHelper azureBlobHelper, IDropDownListHelper dropDownListHelper, IFlashMessage flashMessage)
         {
             _context = context;
             _azureBlobHelper = azureBlobHelper;
             _dropDownListHelper = dropDownListHelper;
+            _flashMessage = flashMessage;
         }
 
         public async Task<IActionResult> Index()
@@ -90,11 +93,13 @@ namespace Proyecto_Final.Controllers
                 {
                     if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                     {
-                        ModelState.AddModelError(string.Empty, "Ya existe un producto con el mismo nombre.");
+                        _flashMessage.Danger(String.Format("Ya existe el producto {0}.", addProductViewModel.Name));
+                        //ModelState.AddModelError(string.Empty, "Ya existe un producto con el mismo nombre.");
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
+                        _flashMessage.Danger(dbUpdateException.InnerException.Message);
+                        //ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
                     }
                 }
                 catch (Exception exception)
