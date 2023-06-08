@@ -41,6 +41,7 @@
                         <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Pedidos</a>
                         </li>
+
                     }
                     else
                     {
@@ -51,7 +52,7 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
 
                     {
                         

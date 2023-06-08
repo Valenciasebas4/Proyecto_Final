@@ -10,7 +10,7 @@ using Vereyon.Web;
 
 namespace Proyecto_Final.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     public class OrdersController : Controller
     {
         private readonly DataBaseContext _context;
@@ -23,6 +23,7 @@ namespace Proyecto_Final.Controllers
             _flashMessage = flashMessage;
             _orderHelper = orderHelper;
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Orders
@@ -32,7 +33,7 @@ namespace Proyecto_Final.Controllers
                 .ToListAsync());
         }
 
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(Guid? orderId)
         {
             if (orderId == null) return NotFound();
@@ -49,6 +50,7 @@ namespace Proyecto_Final.Controllers
             return View(order);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DispatchOrder(Guid? orderId)
         {
             if (orderId == null) return NotFound();
@@ -72,6 +74,7 @@ namespace Proyecto_Final.Controllers
             return RedirectToAction(nameof(Details), new { orderId = order.Id });
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SendOrder(Guid? orderId)
         {
             if (orderId == null) return NotFound();
@@ -93,6 +96,7 @@ namespace Proyecto_Final.Controllers
             return RedirectToAction(nameof(Details), new { orderId = order.Id });
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ConfirmOrder(Guid? orderId)
         {
             if (orderId == null) return NotFound();
@@ -115,6 +119,7 @@ namespace Proyecto_Final.Controllers
             return RedirectToAction(nameof(Details), new { orderId = order.Id });
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CancelOrder(Guid? orderId)
         {
             if (orderId == null) return NotFound();
@@ -132,5 +137,17 @@ namespace Proyecto_Final.Controllers
 
             return RedirectToAction(nameof(Details), new { orderId = order.Id });
         }
+
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> MyOrders()
+        {
+            return View(await _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Product)
+                .Where(o => o.User.UserName == User.Identity.Name)
+                .ToListAsync());
+        }
+
     }
 }
