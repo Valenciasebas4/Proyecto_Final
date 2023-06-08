@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto_Final.DAL;
 using Proyecto_Final.DAL.Entities;
 using System.Data;
+using Vereyon.Web;
 
 namespace Proyecto_Final.Controllers
 {
@@ -11,10 +12,12 @@ namespace Proyecto_Final.Controllers
     public class OrdersController : Controller
     {
         private readonly DataBaseContext _context;
+        private readonly IFlashMessage _flashMessage;
 
-        public OrdersController(DataBaseContext context)
+        public OrdersController(DataBaseContext context, IFlashMessage flashMessage)
         {
             _context = context;
+            _flashMessage = flashMessage;
         }
         public async Task<IActionResult> Index()
         {
