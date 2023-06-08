@@ -11,10 +11,13 @@
         <hr />
         <div class="row">
             <div class="col-md-4">
-                <spam>Solo puedes editar la fecha del entrenamient o en su caso eliminarlo</spam>
+                <spam>Solo puedes editar la fecha del entrenamiento o eliminarlo</spam>
                 <form asp-action="Edit">
                     <input type="hidden" asp-for="Id" />
                     <input type="hidden" asp-for="CreatedDate" />
+                    <input type="hidden" asp-for="TrainingID" />
+                    <input type="hidden" asp-for="UserId" />
+
                     
 
                     <partial name="../Shared/PartialViews/_UserTrainingCreateEdit" />
