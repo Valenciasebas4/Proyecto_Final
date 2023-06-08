@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Final.DAL;
+using Proyecto_Final.DAL.Entities;
 using System.Data;
 
 namespace Proyecto_Final.Controllers
@@ -22,6 +23,23 @@ namespace Proyecto_Final.Controllers
                 .Include(s => s.OrderDetails)
                 .ThenInclude(sd => sd.Product)
                 .ToListAsync());
+        }
+
+
+        public async Task<IActionResult> Details(Guid? orderId)
+        {
+            if (orderId == null) return NotFound();
+
+            Order order = await _context.Orders
+                .Include(s => s.User)
+                .Include(s => s.OrderDetails)
+                .ThenInclude(sd => sd.Product)
+                .ThenInclude(p => p.ProductImages)
+                .FirstOrDefaultAsync(s => s.Id == orderId);
+
+            if (order == null) return NotFound();
+
+            return View(order);
         }
     }
 }
