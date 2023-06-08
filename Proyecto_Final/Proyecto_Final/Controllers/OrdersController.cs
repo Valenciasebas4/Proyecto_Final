@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Final.DAL;
 using Proyecto_Final.DAL.Entities;
+using Proyecto_Final.Enum;
 using System.Data;
 using Vereyon.Web;
 
@@ -43,6 +44,50 @@ namespace Proyecto_Final.Controllers
             if (order == null) return NotFound();
 
             return View(order);
+        }
+
+        public async Task<IActionResult> DispatchOrder(Guid? orderId)
+        {
+            if (orderId == null) return NotFound();
+
+            Order order = await _context.Orders.FindAsync(orderId);
+            if (order == null) return NotFound();
+
+            if (order.OrderStatus != OrderStatus.Nuevo)
+                _flashMessage.Danger(String.Format("Solo se pueden enviar pedidos que estén en estado '{0}'.", OrderStatus.Nuevo));
+
+            else
+            {
+                order.OrderStatus = OrderStatus.Despachado;
+                order.ModifiedDate = DateTime.Now;
+                _context.Orders.Update(order);
+                await _context.SaveChangesAsync();
+                _flashMessage.Confirmation(String.Format("El estado del pedido ha sido cambiado a '{0}'.", OrderStatus.Despachado));
+
+            }
+
+            return RedirectToAction(nameof(Details), new { orderId = order.Id });
+        }
+
+        public async Task<IActionResult> SendOrder(Guid? orderId)
+        {
+            if (orderId == null) return NotFound();
+
+            Order order = await _context.Orders.FindAsync(orderId);
+            if (order == null) return NotFound();
+
+            if (order.OrderStatus != OrderStatus.Despachado)
+                _flashMessage.Danger(String.Format("Solo se pueden enviar pedidos que estén en estado '{0}'.", OrderStatus.Despachado));
+            else
+            {
+                order.OrderStatus = OrderStatus.Enviado;
+                order.ModifiedDate = DateTime.Now;
+                _context.Orders.Update(order);
+                await _context.SaveChangesAsync();
+                _flashMessage.Confirmation(String.Format("El estado del pedido ha sido cambiado a '{0}'.", OrderStatus.Enviado));
+            }
+
+            return RedirectToAction(nameof(Details), new { orderId = order.Id });
         }
     }
 }
