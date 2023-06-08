@@ -26,30 +26,42 @@ namespace Proyecto_Final.Controllers
             _userHelper = userHelper;
             _orderHelper = orderHelper;
         }
-        
-        public async Task<IActionResult> Index()
+
+
+        public async Task<IActionResult> ViewProducts(string sortOrder)
         {
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "PriceDesc" : "Price";
             ViewBag.UserFullName = GetUserFullName();
 
-            return View();
-        }
-        
+            IQueryable<Product> query = _context.Products
+                .Include(p => p.ProductImages)
+                .Include(p => p.ProductCategories);
 
-        public async Task<IActionResult> ViewProducts()
-        {
-            List<Product>? products = await _context.Products
-                 .Include(p => p.ProductImages)
-                 .Include(p => p.ProductCategories)
-                 .OrderBy(p => p.Description)
-                 .ToListAsync();
+            //List<Product>? products = await _context.Products
+            //   .Include(p => p.ProductImages)
+            //   .Include(p => p.ProductCategories)
+            //   .OrderBy(p => p.Description)
+            //   .ToListAsync();
 
-            //Variables de Sesión
-            ViewBag.UserFullName = GetUserFullName();
-
-            HomeViewModel homeViewModel = new()
+            switch (sortOrder)
             {
-                Products = products
-            };
+                case "NameDesc":
+                    query = query.OrderByDescending(p => p.Name);
+                    break;
+                case "Price":
+                    query = query.OrderBy(p => p.Price);
+                    break;
+                case "PriceDesc":
+                    query = query.OrderByDescending(p => p.Price);
+                    break;
+                default:
+                    query = query.OrderBy(p => p.Name);
+                    break;
+            }
+
+            //Begins New change
+            HomeViewModel homeViewModel = new() { Products = await query.ToListAsync() };
 
             User user = await _userHelper.GetUserAsync(User.Identity.Name);
             if (user != null)
@@ -60,8 +72,46 @@ namespace Proyecto_Final.Controllers
             }
 
             return View(homeViewModel);
+            //Ends New change
         }
 
+
+        
+         public async Task<IActionResult> Index()
+        {
+            ViewBag.UserFullName = GetUserFullName();
+
+            return View();
+        }
+        
+        /*
+                public async Task<IActionResult> ViewProducts()
+                {
+                    List<Product>? products = await _context.Products
+                         .Include(p => p.ProductImages)
+                         .Include(p => p.ProductCategories)
+                         .OrderBy(p => p.Description)
+                         .ToListAsync();
+
+                    //Variables de Sesión
+                    ViewBag.UserFullName = GetUserFullName();
+
+                    HomeViewModel homeViewModel = new()
+                    {
+                        Products = products
+                    };
+
+                    User user = await _userHelper.GetUserAsync(User.Identity.Name);
+                    if (user != null)
+                    {
+                        homeViewModel.Quantity = await _context.TemporalSales
+                            .Where(ts => ts.User.Id == user.Id)
+                            .SumAsync(ts => ts.Quantity);
+                    }
+
+                    return View(homeViewModel);
+                }
+        */
 
 
         private string GetUserFullName()

@@ -41,6 +41,14 @@
                         <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Pedidos</a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="UserProfile">@ViewBag.UserFullName</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Cerrar Sesión</a>
+                        </li>
 
                     }
                     else
@@ -52,6 +60,7 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+
                     @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
 
                     {
