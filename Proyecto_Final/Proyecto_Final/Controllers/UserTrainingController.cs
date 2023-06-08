@@ -74,6 +74,28 @@ namespace Proyecto_Final.Controllers
                        Problem("Entity set 'DataBaseContext.UserTrainings'  is null.");
             */
         }
+        public async Task<IActionResult> MyTrainings()
+        {
+            ViewBag.UserFullName = GetUserFullName();
+
+            ViewBag.TrainingName = GetTrainingName();
+            ViewBag.UserId = GetUserId();
+
+
+            return View(await _context.UserTrainings
+                .Include(o => o.User)
+                .Include(o => o.Training)
+
+                // Where(o => o.User.UserName == User.Identity.Name)
+                .ToListAsync());
+            Problem("Entity set 'DataBaseContext.UserTrainings'  is null.");
+            /*
+            return _context.UserTrainings != null ?
+                        View(await _context.UserTrainings.ToListAsync()) :
+                        
+                       Problem("Entity set 'DataBaseContext.UserTrainings'  is null.");
+            */
+        }
 
 
 
