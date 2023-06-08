@@ -120,5 +120,7 @@ namespace Proyecto_Final.Services
                 .ThenInclude(s => s.Country)
                 .FirstOrDefaultAsync(u => u.Id == userId.ToString());
         }
+
+
     }
 }

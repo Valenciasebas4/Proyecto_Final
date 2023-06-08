@@ -26,8 +26,17 @@ namespace Proyecto_Final.Controllers
             _flashMessage = flashMessage;
         }
 
+        private string GetUserFullName()
+        {
+            return _context.Users
+                .Where(u => u.Email == User.Identity.Name)
+                .Select(u => u.FullName)
+                .FirstOrDefault();
+        }
+
         public async Task<IActionResult> Index()
         {
+            ViewBag.UserFullName = GetUserFullName();
             return View(await _context.Products
                 .Include(p => p.ProductImages)
                 .Include(p => p.ProductCategories)
@@ -37,6 +46,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> Create()
         {
+            ViewBag.UserFullName = GetUserFullName();
             AddProductViewModel addProductViewModel = new()
             {
                 Categories = await _dropDownListHelper.GetDDLCategoriesAsync(),
@@ -114,6 +124,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> Edit(Guid? productId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (productId == null) return NotFound();
 
             Product product = await _context.Products.FindAsync(productId);
@@ -169,6 +180,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> Details(Guid? productId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (productId == null) return NotFound();
 
             Product product = await _context.Products
@@ -185,6 +197,7 @@ namespace Proyecto_Final.Controllers
         [HttpGet]
         public async Task<IActionResult> AddImage(Guid? productId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (productId == null) return NotFound();
 
             Product product = await _context.Products.FindAsync(productId);
@@ -232,6 +245,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> DeleteImage(Guid? imageId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (imageId == null) return NotFound();
 
             ProductImage productImage = await _context.ProductImages
@@ -249,6 +263,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> AddCategory(Guid? productId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (productId == null) return NotFound();
 
             Product product = await _context.Products
@@ -319,6 +334,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> DeleteCategory(Guid? categoryId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (categoryId == null) return NotFound();
 
             ProductCategory productCategory = await _context.ProductCategories
@@ -333,6 +349,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> Delete(Guid? productId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (productId == null) return NotFound();
 
             Product product = await _context.Products

@@ -17,9 +17,19 @@ namespace Proyecto_Final.Controllers
             _context = context;
         }
 
+        private string GetUserFullName()
+        {
+            return _context.Users
+                .Where(u => u.Email == User.Identity.Name)
+                .Select(u => u.FullName)
+                .FirstOrDefault();
+        }
+
+
         // GET: Categories
         public async Task<IActionResult> Index()
         {
+            ViewBag.UserFullName = GetUserFullName();
             return _context.Categories != null ?
                         View(await _context.Categories.ToListAsync()) :
                         Problem("Entity set 'DataBaseContext.Categories'  is null.");
@@ -28,6 +38,7 @@ namespace Proyecto_Final.Controllers
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (id == null || _context.Categories == null)
             {
                 return NotFound();
@@ -49,6 +60,7 @@ namespace Proyecto_Final.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
+            ViewBag.UserFullName = GetUserFullName();
             return View();
         }
 
@@ -87,6 +99,7 @@ namespace Proyecto_Final.Controllers
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Guid? id)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (id == null || _context.Categories == null) return NotFound();
 
             var category = await _context.Categories.FindAsync(id);
@@ -134,6 +147,7 @@ namespace Proyecto_Final.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid? id)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (id == null || _context.Categories == null) return NotFound();
 
             var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);

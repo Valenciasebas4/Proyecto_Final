@@ -23,6 +23,8 @@ namespace Proyecto_Final.Controllers
             _userHelper = userHelper;
         }
 
+
+
         private string GetUserId()
         {
             return _context.Users

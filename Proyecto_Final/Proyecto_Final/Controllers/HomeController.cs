@@ -153,11 +153,13 @@ namespace Proyecto_Final.Controllers
         [Route("error/404")]
         public IActionResult Error404()
         {
+            ViewBag.UserFullName = GetUserFullName();
             return View();
         }
 
         public async Task<IActionResult> AddProductInCart(Guid? productId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (productId == null) return NotFound();
 
             if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
@@ -198,6 +200,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> DetailsProduct(Guid? productId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (productId == null) return NotFound();
 
             Product product = await _context.Products
@@ -274,6 +277,7 @@ namespace Proyecto_Final.Controllers
         [Authorize] //Etiqueta para que solo usuarios logueados puedan acceder a este método.
         public async Task<IActionResult> ShowCartAndConfirm()
         {
+            ViewBag.UserFullName = GetUserFullName();
             User user = await _userHelper.GetUserAsync(User.Identity.Name);
             if (user == null) return NotFound();
 
@@ -296,6 +300,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> DecreaseQuantity(Guid? temporalSaleId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (temporalSaleId == null) return NotFound();
 
             TemporalSale temporalSale = await _context.TemporalSales.FindAsync(temporalSaleId);
@@ -314,6 +319,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> IncreaseQuantity(Guid? temporalSaleId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (temporalSaleId == null) return NotFound();
 
             TemporalSale temporalSale = await _context.TemporalSales.FindAsync(temporalSaleId);
@@ -329,6 +335,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> DeleteTemporalSale(Guid? temporalSaleId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (temporalSaleId == null) return NotFound();
 
             TemporalSale temporalSale = await _context.TemporalSales.FindAsync(temporalSaleId);
@@ -341,6 +348,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> EditTemporalSale(Guid? temporalSaleId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (temporalSaleId == null) return NotFound();
 
             TemporalSale temporalSale = await _context.TemporalSales.FindAsync(temporalSaleId);
@@ -389,6 +397,7 @@ namespace Proyecto_Final.Controllers
         [Authorize]
         public IActionResult OrderSuccess()
         {
+            ViewBag.UserFullName = GetUserFullName();
             //string serializedData = TempData["showCartViewModel"] as string;
             //ShowCartViewModel showCartViewModel = JsonConvert.DeserializeObject<ShowCartViewModel>(serializedData);
 

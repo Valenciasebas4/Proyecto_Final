@@ -23,9 +23,18 @@ namespace Proyecto_Final.Controllers
             _flashMessage = flashMessage;
             _orderHelper = orderHelper;
         }
+        private string GetUserFullName()
+        {
+            return _context.Users
+                .Where(u => u.Email == User.Identity.Name)
+                .Select(u => u.FullName)
+                .FirstOrDefault();
+        }
+
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
+            ViewBag.UserFullName = GetUserFullName();
             return View(await _context.Orders
                 .Include(s => s.User)
                 .Include(s => s.OrderDetails)
@@ -36,6 +45,7 @@ namespace Proyecto_Final.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(Guid? orderId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (orderId == null) return NotFound();
 
             Order order = await _context.Orders
@@ -53,6 +63,7 @@ namespace Proyecto_Final.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DispatchOrder(Guid? orderId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (orderId == null) return NotFound();
 
             Order order = await _context.Orders.FindAsync(orderId);
@@ -77,6 +88,7 @@ namespace Proyecto_Final.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SendOrder(Guid? orderId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (orderId == null) return NotFound();
 
             Order order = await _context.Orders.FindAsync(orderId);
@@ -99,6 +111,7 @@ namespace Proyecto_Final.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ConfirmOrder(Guid? orderId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (orderId == null) return NotFound();
 
             Order order = await _context.Orders.FindAsync(orderId);
@@ -122,6 +135,7 @@ namespace Proyecto_Final.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CancelOrder(Guid? orderId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (orderId == null) return NotFound();
 
             Order order = await _context.Orders.FindAsync(orderId);
@@ -141,6 +155,7 @@ namespace Proyecto_Final.Controllers
         [Authorize(Roles = "User")]
         public async Task<IActionResult> MyOrders()
         {
+            ViewBag.UserFullName = GetUserFullName();
             return View(await _context.Orders
                 .Include(o => o.User)
                 .Include(o => o.OrderDetails)
@@ -152,6 +167,7 @@ namespace Proyecto_Final.Controllers
         [Authorize(Roles = "User")]
         public async Task<IActionResult> MyOrderDetails(Guid? orderId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (orderId == null) return NotFound();
 
             Order order = await _context.Orders

@@ -25,9 +25,18 @@ namespace Proyecto_Final.Controllers
             _azureBlobHelper = azureBlobHelper;
         }
 
+        private string GetUserFullName()
+        {
+            return _context.Users
+                .Where(u => u.Email == User.Identity.Name)
+                .Select(u => u.FullName)
+                .FirstOrDefault();
+        }
+
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
+            ViewBag.UserFullName = GetUserFullName();
             return View(await _context.Users
                 .Include(u => u.City)
                 .ThenInclude(c => c.State)
@@ -38,6 +47,7 @@ namespace Proyecto_Final.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateAdmin()
         {
+            ViewBag.UserFullName = GetUserFullName();
             AddUserViewModel addUserViewModel = new()
             {
                 Id = Guid.Empty,
@@ -89,6 +99,7 @@ namespace Proyecto_Final.Controllers
         [HttpGet]
         public JsonResult GetStates(Guid countryId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             Country country = _context.Countries
                 .Include(c => c.States)
                 .FirstOrDefault(c => c.Id == countryId);
@@ -101,6 +112,7 @@ namespace Proyecto_Final.Controllers
         [HttpGet]
         public JsonResult GetCities(Guid stateId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             State state = _context.States
                 .Include(s => s.Cities)
                 .FirstOrDefault(s => s.Id == stateId);

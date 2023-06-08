@@ -23,11 +23,20 @@ namespace Proyecto_Final.Controllers
             _context = context;
         }
 
+        private string GetUserFullName()
+        {
+            return _context.Users
+                .Where(u => u.Email == User.Identity.Name)
+                .Select(u => u.FullName)
+                .FirstOrDefault();
+        }
+
 
         // GET: Countries
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            ViewBag.UserFullName = GetUserFullName();
             return View(await _context.Countries
                 .Include(c => c.States) //El Include me hace las veces del INNER JOIN
                 .ToListAsync());
@@ -36,6 +45,7 @@ namespace Proyecto_Final.Controllers
         // GET: Countries/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (id == null || _context.Countries == null)
             {
                 return NotFound();
@@ -58,6 +68,7 @@ namespace Proyecto_Final.Controllers
         //[Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
+            ViewBag.UserFullName = GetUserFullName();
             return View();
         }
 
@@ -98,6 +109,7 @@ namespace Proyecto_Final.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Guid? id)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (id == null || _context.Countries == null) return NotFound();
 
             var country = await _context.Countries.FindAsync(id);
@@ -149,6 +161,7 @@ namespace Proyecto_Final.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid? id)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (id == null || _context.Countries == null) return NotFound();
 
             var country = await _context.Countries.FirstOrDefaultAsync(m => m.Id == id); //Select * From Countries Where Id = '7a216d04-3048-4757-9b02-f72ded5180bf'
@@ -182,6 +195,7 @@ namespace Proyecto_Final.Controllers
         [HttpGet]
         public async Task<IActionResult> AddState(Guid? countryId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (countryId == null) return NotFound();
 
             Country country = await _context.Countries.FirstOrDefaultAsync(c => c.Id == countryId);
@@ -236,6 +250,7 @@ namespace Proyecto_Final.Controllers
         [HttpGet]
         public async Task<IActionResult> EditState(Guid? stateId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (stateId == null || _context.States == null) return NotFound();
 
             State state = await _context.States
@@ -295,6 +310,7 @@ namespace Proyecto_Final.Controllers
         [HttpGet]
         public async Task<IActionResult> DetailsState(Guid? stateId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (stateId == null || _context.States == null) return NotFound();
 
             var state = await _context.States
@@ -309,6 +325,7 @@ namespace Proyecto_Final.Controllers
 
         public async Task<IActionResult> DeleteState(Guid? stateId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (stateId == null || _context.States == null) return NotFound();
 
             var state = await _context.States
@@ -344,6 +361,7 @@ namespace Proyecto_Final.Controllers
         [HttpGet]
         public async Task<IActionResult> AddCity(Guid? stateId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (stateId == null) return NotFound();
 
             State state = await _context.States.FirstOrDefaultAsync(c => c.Id == stateId);
@@ -397,6 +415,7 @@ namespace Proyecto_Final.Controllers
         [HttpGet]
         public async Task<IActionResult> EditCity(Guid? cityId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (cityId == null || _context.Cities == null) return NotFound();
 
             City city = await _context.Cities
@@ -456,6 +475,7 @@ namespace Proyecto_Final.Controllers
         [HttpGet]
         public async Task<IActionResult> DetailsCity(Guid? cityId)
         {
+            ViewBag.UserFullName = GetUserFullName();
             if (cityId == null || _context.Cities == null) return NotFound();
 
             var city = await _context.Cities
