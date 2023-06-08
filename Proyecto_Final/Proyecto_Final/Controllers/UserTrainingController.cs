@@ -126,19 +126,19 @@ namespace Proyecto_Final.Controllers
 
                     _context.Add(userTraining);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof( Index));
+                    return RedirectToAction(nameof( MyTrainings));
                 }
-                catch (DbUpdateException dbUpdateException)
+               /* catch (DbUpdateException dbUpdateException)
                 {
                     if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                     {
-                        ModelState.AddModelError(string.Empty, "Ya existe un producto con el mismo nombre.");
+                        ModelState.AddModelError(string.Empty, "Ya existe una clase con el mismo nombre.");
                     }
                     else
                     {
                         ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
                     }
-                }
+                */
                 catch (Exception exception)
                 {
                     ModelState.AddModelError(string.Empty, exception.Message);
@@ -179,19 +179,62 @@ namespace Proyecto_Final.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateException dbUpdateException)
+                /*catch (DbUpdateException dbUpdateException)
                 {
                     if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                         ModelState.AddModelError(string.Empty, "Ya existe un entrenamiento en esta fecha.");
                     else
                         ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
-                }
+                }*/
                 catch (Exception exception)
                 {
                     ModelState.AddModelError(string.Empty, exception.Message);
                 }
             }
             return View(userTraining);
+        }
+
+        // GET: UserTrainings/Delete/5
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(Guid? id)
+        {
+            ViewBag.UserFullName = GetUserFullName();
+            if (id == null || _context.UserTrainings == null) return NotFound();
+
+            var userTraining = await _context.UserTrainings.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (userTraining == null) return NotFound();
+
+            return View(userTraining);
+        }
+
+        // POST: UserTrainings/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            ViewBag.TrainingName = GetTrainingName();
+            ViewBag.UserId = GetUserId();
+            /*return View(await _context.UserTrainings
+                .Include(o => o.User)
+                .Include(o => o.Training)
+                .ToListAsync());
+            Problem("Entity set 'DataBaseContext.UserTrainings'  is null.");*/
+
+            if (_context.UserTrainings == null)
+
+                return View(await _context.UserTrainings
+                .Include(o => o.User)
+                .Include(o => o.Training)
+                .ToListAsync()); 
+            Problem("Entity set 'DataBaseContext.UserTrainings' is null.");
+
+            var userTraining = await _context.UserTrainings.FindAsync(id); //Select * From Categories Where Id = '7a216d04-3048-4757-9b02-f72ded5180bf'
+            if (userTraining != null) _context.UserTrainings.Remove(userTraining);
+
+            await _context.SaveChangesAsync(); //Delete From Categories where Id = '7a216d04-3048-4757-9b02-f72ded5180bf'
+            return RedirectToAction(nameof(MyTrainings));
         }
 
     }

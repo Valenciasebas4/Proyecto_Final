@@ -12,6 +12,7 @@ namespace Proyecto_Final.Models
         public Guid TrainingId { get; set; }
         public string TrainingName { get; set; }
         public IEnumerable<SelectListItem> Trainings { get; set; }
+        [Display(Name = "Fecha de Clase")]
         public DateTime DateClass { get; set; }
     }
 }
