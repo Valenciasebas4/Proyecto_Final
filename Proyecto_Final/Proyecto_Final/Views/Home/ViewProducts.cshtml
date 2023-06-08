@@ -14,8 +14,9 @@
                 {
                     <span>@item.Name&nbsp;&nbsp;</span>
                 }
-            </div>
-            <form asp-action="Index" method="get">
+                <div>
+                    <hr />
+                    <form asp-action="ViewProducts" method="get">
                 <div class="form-actions no-color">
                     <p>
                         Buscar por nombre o categoría: <input type="text" name="SearchString" value="@ViewBag.CurrentFilter" />
@@ -24,6 +25,9 @@
                     </p>
                 </div>
             </form>
+                </div>
+            </div>
+            
 
             <div>
                 <h5>Orderar por:</h5>

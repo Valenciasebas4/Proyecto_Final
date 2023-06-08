@@ -25,6 +25,7 @@
                     </dd>
                 </dl>
             </div>
+           
             <div class="col-md-8">
                 <div class="col-md-12">
                     <form asp-action="ShowCartAndConfirm">
@@ -42,17 +43,18 @@
                 </div>
             </div>
         </div>
-
+        <hr />
 
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Carro de Compras</h3>
+                    <div class="panel-heading row text-center">
+                        <h3 class="panel-title col">Carro de Compras</h3>
+                        <form asp-action="DeleteAll" class="col">
+                            <input type="submit" style="margin-bottom: 10px" value="Borrar Todo" class="btn btn-outline-danger" />
+                        </form>
                     </div>
-                    <form asp-action="DeleteAll">
-                        <input type="submit" style="margin-bottom: 10px" value="Borrar Todo" class="btn btn-outline-danger" />
-                    </form>
+                    
                     <div class="panel-body">
                         <table class="table table-hover table-responsive table-striped" id="MyTable">
                             <thead>

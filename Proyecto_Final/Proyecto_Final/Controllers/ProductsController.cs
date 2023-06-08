@@ -325,7 +325,7 @@ namespace Proyecto_Final.Controllers
             List<Category> categories = product.ProductCategories.Select(pc => new Category
             {
                 Id = pc.Category.Id,
-                Name = pc.Category.Name, 
+                Name = pc.Category.Name,
             }).ToList();
 
             addProductCategoryViewModel.Categories = await _dropDownListHelper.GetDDLCategoriesAsync(categories);

@@ -1,0 +1,48 @@
+﻿@model Proyecto_Final.DAL.Entities.Order
+
+
+
+
+<h4>Pedido</h4>
+<hr />
+
+
+<dl class="row">
+    <div class="col-sm-2">
+        <dt>@Html.DisplayNameFor(model => model.CreatedDate)</dt>
+        <dd>@Html.DisplayFor(model => model.CreatedDate)</dd>
+    </div>
+    <div class="col-sm-2">
+        <dt>@Html.DisplayNameFor(model => model.User.FullName)</dt>
+        <dd>@Html.DisplayFor(model => model.User.FullName)</dd>
+    </div>
+    <div class="col-sm-2">
+        <dt>@Html.DisplayNameFor(model => model.User.Email)</dt>
+        <dd>@Html.DisplayFor(model => model.User.Email)</dd>
+    </div>
+    <div class="col-sm-2">
+        <dt>@Html.DisplayNameFor(model => model.User.PhoneNumber)</dt>
+        <dd>@Html.DisplayFor(model => model.User.PhoneNumber)</dd>
+    </div>
+    <div class="col-sm-2">
+        <dt>@Html.DisplayNameFor(model => model.Remarks)</dt>
+        <dd>@Html.DisplayFor(model => model.Remarks)</dd>
+    </div>
+    <div class="col-sm-2">
+        <dt>@Html.DisplayNameFor(model => model.OrderStatus)</dt>
+        <dd>@Html.DisplayFor(model => model.OrderStatus)</dd>
+    </div>
+    <div class="col-sm-2">
+        <dt>@Html.DisplayNameFor(model => model.Lines)</dt>
+        <dd>@Html.DisplayFor(model => model.Lines)</dd>
+    </div>
+    <div class="col-sm-2">
+        <dt>@Html.DisplayNameFor(model => model.Quantity)</dt>
+        <dd>@Html.DisplayFor(model => model.Quantity)</dd>
+    </div>
+    <div class="col-sm-2">
+        <dt>@Html.DisplayNameFor(model => model.Value)</dt>
+        <dd>@Html.DisplayFor(model => model.Value)</dd>
+    </div>
+</dl>
+

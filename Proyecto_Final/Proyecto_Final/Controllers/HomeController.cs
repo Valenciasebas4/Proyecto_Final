@@ -443,7 +443,7 @@ namespace Proyecto_Final.Controllers
             _context.RemoveRange(temporalSale);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ViewProducts));
         }
 
 
