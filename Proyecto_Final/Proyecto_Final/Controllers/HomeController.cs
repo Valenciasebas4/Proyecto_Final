@@ -354,7 +354,28 @@ namespace Proyecto_Final.Controllers
             ModelState.AddModelError(string.Empty, response.Message);
             return View(showCartViewModel);
         }
-        
+
+
+        // Eliminar todos los productos del carrito
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteAll()
+        {
+            User user = await _userHelper.GetUserAsync(User.Identity.Name);
+            if (user == null) return NotFound();
+
+            List<TemporalSale> temporalSale = await _context.TemporalSales
+                .Where(ts => ts.User.Id == user.Id)
+                .ToListAsync();
+
+            _context.RemoveRange(temporalSale);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
 
         /*
         [HttpPost]
