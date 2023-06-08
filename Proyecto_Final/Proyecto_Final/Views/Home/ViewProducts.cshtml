@@ -8,9 +8,16 @@
 
 <div class="container">
     <main role="main" class="pb-3 p-3">
+        <div class="mb-2 d-flex justify-content-between">
+            <div>
+                <h5>Orderar por:</h5>
+                <a asp-action="ViewProducts" asp-route-sortOrder="@ViewBag.NameSortParm" class="btn btn-outline-info">Nombre</a>&nbsp;&nbsp;
+                <a asp-action="ViewProducts" asp-route-sortOrder="@ViewBag.PriceSortParm" class="btn btn-outline-info">Precio</a>
+            </div>
+            <div>
+        
         @if (Model.Quantity > 0)
         {
-
             <a class="nav-link text-dark" asp-action="ShowCartAndConfirm">
                 <i class="fa fa-shopping-cart"></i>
                 <img class=" text-center" src="~/images/cart-shop.png" alt="" width="75" height="60">
@@ -18,6 +25,8 @@
             </a>
 
         }
+            </div>
+        </div>
 
         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
         {
