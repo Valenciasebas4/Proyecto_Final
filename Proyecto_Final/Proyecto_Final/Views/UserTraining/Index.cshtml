@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
 
-<div class="container-m4">
+<div class="container">
     <main role="main" class="pb-3 p-3">
 
         <div class="panel-heading text-center">
@@ -16,11 +16,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                    </div>
+                    <div class="panel-heading">  </div>
                     <div class="panel-body">
-                        <table class="table table-borderless table-light table-hover table-responsive table-striped" id="UserTrainingTable">
-                            <thead>
+                        
+                        <table class="table table-borderless table-light table-hover table-responsive" id="UserTrainingTable">
+                            <thead class="table-dark">
                                 <tr>
                                     <th>
                                         @Html.DisplayNameFor(model => model.Training.Name)
