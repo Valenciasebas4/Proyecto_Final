@@ -35,8 +35,8 @@ namespace Proyecto_Final.Controllers
         public async Task<IActionResult> Index()
         {
             ViewBag.UserFullName = GetUserFullName();
-            return View(await _context.Orders
-                .Include(s => s.User)
+            return View(await _context.Orders 
+                .Include(s => s.User) // Se usa para cargar entidades relacionadas en la consulta. 
                 .Include(s => s.OrderDetails)
                 .ThenInclude(sd => sd.Product)
                 .ToListAsync());
@@ -48,8 +48,9 @@ namespace Proyecto_Final.Controllers
             ViewBag.UserFullName = GetUserFullName();
             if (orderId == null) return NotFound();
 
+            //Obtener un uan orden en especifico 
             Order order = await _context.Orders
-                .Include(s => s.User)
+                .Include(s => s.User) 
                 .Include(s => s.OrderDetails)
                 .ThenInclude(sd => sd.Product)
                 .ThenInclude(p => p.ProductImages)
