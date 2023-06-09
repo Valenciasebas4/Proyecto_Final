@@ -12,22 +12,22 @@
 
         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
         {
-            <div class="text-center rounded-pill" style="background: linear-gradient(to right, #f05053 60%, #e1eec3); ">
+            <div class="text-center rounded-pill container" style="background: linear-gradient(90deg, #F8F7FF 0%, #3691FA 0%, rgba(33,126,250,98) 48%, #F8F7FF 100%);">
                 <h1 class="display-4">Bienvenidos @ViewBag.UserFullName a la administración de ECommerce</h1>
             </div>
         }
         else
         {
 
-            <div class="px-4 py-5 my-5 text-center  title-index container-sm ">
+            <div class="px-2 py-5 my-2 text-center  title-index container-sm ">
                 <h1 class="display-5 fw-bold">Bienvenido a Nuestra Tienda</h1>
                 <div class="col-lg-6 mx-auto">
                     <p class="lead mb-4">En nuestra tienda, nos enorgullece ofrecer productos y servicios de alta calidad para satisfacer las necesidades de nuestros clientes. Nuestro objetivo es proporcionar una experiencia de compra excepcional y un servicio al cliente de primera clase.</p>
                 </div>
             </div>
 
-            <div class="form-group mt-2 p-4 container text-center">
-                 <a asp-action="ViewProducts" asp-controller="Home" class="btn btn-lg btn-primary">COMPRA AQUÍ</a>
+            <div class="form-group mt-2 p-2 container text-center ">
+                <a asp-action="ViewProducts" asp-controller="Home" class="btn btn-lg btn-primary a-bootom">COMPRA AQUÍ</a>
              </div>
 
 

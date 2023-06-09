@@ -38,12 +38,12 @@
         
         @if (Model.Quantity > 0)
         {
-            <a class="nav-link text-dark" asp-action="ShowCartAndConfirm">
+            <a class="nav-link text-dark car-shop" asp-action="ShowCartAndConfirm">
                 <i class="fa fa-shopping-cart"></i>
-                <img class=" text-center" src="~/images/cart-shop.png" alt="" width="75" height="60">
+                <img class="text-center" src="~/images/cart-shop.png" alt="" width="75" height="60">
                 (@Model.Quantity)
             </a>
-
+           
         }
             </div>
         </div>
@@ -116,5 +116,7 @@
         }
     </main>
 </div>
+
+
 
 

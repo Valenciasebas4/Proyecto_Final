@@ -56,7 +56,7 @@ body {
 
 .body-login {
     /*background: rgba(31, 132, 224, 0.07);*/
-    border-radius: 16px;
+    /* border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(8.5px);
     -webkit-backdrop-filter: blur(8.5px);
@@ -64,11 +64,12 @@ body {
     background-image: url(../images/fondo.jpg);
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;*/
+    background: linear-gradient(90deg, #F8F7FF 0%, #3691FA 0%, rgba(33,126,250,98) 48%, #F8F7FF 100%);
 }
 
 .div-title {
-    border-radius: 16px;
+    /*border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(8.5px);
     -webkit-backdrop-filter: blur(8.5px);
@@ -76,7 +77,10 @@ body {
     background-image: url(../images/fondo.jpg);
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;*/
+    background: linear-gradient(90deg, #F8F7FF 10%, #3691FA 35%, rgba(33,126,250,98) 45%, #F8F7FF 100%);
+    padding: 2px;
+    color: white;
 }
     .div-title h2 {
         color: white;
@@ -190,7 +194,7 @@ color:white;
 
 .zoom-2:hover {
         
-         -ms-transform: scale(1.1);
+        -ms-transform: scale(1.1);
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
     }
@@ -319,4 +323,45 @@ color:white;
     background-position: center;
     background-repeat: no-repeat;
     color:white;
+}
+
+.car-shop:hover {
+    transition: all 0.2s ease;
+    border-bottom:groove;
+    border-radius: 20%;
+    -ms-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.a-nav:hover {
+    background: rgb(189, 189, 189);
+    background: linear-gradient(90deg, #F8F7FF 0%, #3691FA 0%, rgba(33,126,250,98) 48%, #F8F7FF 100%);
+    background-size: 300% 100%;
+    animation: gradient 2s ease infinite;
+    border-radius: 5%;
+}
+.a-bootom {
+    background: rgb(189, 189, 189);
+    background: linear-gradient(90deg, #F8F7FF 0%, #3691FA 35%, rgba(33,126,250,98) 48%, #F8F7FF 100%);
+    background-size: 300% 100%;
+    animation: gradient 2s ease infinite;
+    border-radius: 5%;
+    border: none;
+    
+}
+
+
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
